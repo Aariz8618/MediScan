@@ -1,5 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!-- ── Login Screen ───────────────────────────────── -->
+    <color name="hero_top">#1B6B52</color>
+    <color name="hero_mid">#227A5E</color>
+    <color name="hero_bottom">#2E9E76</color>
+    <color name="screen_mint">#C5E3DC</color>
+    <color name="primary_teal">#2A9E78</color>
+    <color name="primary_dark">#1D7A5A</color>
+    <color name="input_bg">#FFFFFF</color>
+    <color name="border_email">#2A9E78</color>
+    <color name="border_normal">#D0E4E0</color>
+    <color name="text_dark">#2C4A45</color>
+    <color name="text_muted">#7AA09A</color>
+    <color name="text_placeholder">#9BBFB8</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="text_tagline">#C0FFFFFF</color>
+    <color name="logo_fill">#33FFFFFF</color>
+    <color name="logo_border">#59FFFFFF</color>
+    <color name="divider">#B0D0C8</color>
+
+    <!-- ── Brand ──────────────────────────────────────── -->
+    <color name="ic_green">#1A7F64</color>
+    <color name="ic_green_dark">#0C5038</color>
+    <color name="ic_green_light">#E8F5F1</color>
+
+    <!-- ── Text ──────────────────────────────────────── -->
+    <color name="ic_txt">#1C2B2A</color>
+    <color name="ic_muted">#6B8883</color>
+    <color name="ic_muted2">#4A7A71</color>
+
+    <!-- ── App background ────────────────────────────── -->
+    <color name="ic_bg">#EBF2F0</color>
+    <color name="ic_white">#FFFFFF</color>
+
+    <!-- ── Card / Surface ────────────────────────────── -->
+    <color name="ic_card">#FFFFFF</color>
+    <color name="ic_card_border">#DCEAE7</color>
+
+    <!-- ── Flag pills ─────────────────────────────────── -->
+    <color name="ic_flag_hi_bg">#FFE8E8</color>
+    <color name="ic_flag_hi_txt">#E05252</color>
+    <color name="ic_flag_lo_bg">#E3F0FB</color>
+    <color name="ic_flag_lo_txt">#2196C4</color>
+    <color name="ic_flag_ok_bg">#E0F5EF</color>
+    <color name="ic_flag_ok_txt">#27A882</color>
+
+    <!-- ── Alerts ─────────────────────────────────────── -->
+    <color name="ic_warn_bg">#FFF8E8</color>
+    <color name="ic_warn_border">#F5D88A</color>
+    <color name="ic_warn_txt">#7A5500</color>
+    <color name="ic_danger_bg">#FFF3F3</color>
+    <color name="ic_danger_border">#F5CCCC</color>
+    <color name="ic_danger_txt">#7A1A1A</color>
+
+    <!-- ── Processing steps ───────────────────────────── -->
+    <color name="ic_step_done_bg">#E8F5F1</color>
+    <color name="ic_step_pending_bg">#E0ECEA</color>
+
+    <!-- ── Upload zone ────────────────────────────────── -->
+    <color name="ic_upload_zone_bg">#F5FAF8</color>
+
+    <!-- ── Privacy card ───────────────────────────────── -->
+    <color name="ic_privacy_bg">#EDF7F4</color>
+
+    <!-- ── Report type icon backgrounds ──────────────── -->
+    <color name="ic_lab_bg">#FFF4E0</color>
+    <color name="ic_ecg_bg">#E3F0FB</color>
+    <color name="ic_mri_bg">#F0EBFA</color>
+    <color name="ic_xray_bg">#E8F5F1</color>
+    <color name="ic_ct_bg">#E8F3FF</color>
+    <color name="ic_eye_bg">#FEF0E8</color>
+    <color name="ic_rx_bg">#F0EBFA</color>
+
+    <!-- ── Table ──────────────────────────────────────── -->
+    <color name="ic_tbl_row_abn">#FFF8F8</color>
+    <color name="ic_divider">#DCEAE7</color>
+
+    <!-- ── Bottom nav ────────────────────────────────── -->
+    <color name="ic_nav_active">#1B7A5A</color>
+    <color name="ic_nav_inactive">#A0B5B1</color>
+
+    <!-- ── Status bar ────────────────────────────────── -->
+    <color name="ic_status_bar">#1B7A5A</color>
+    <color name="c_red">#E05252</color>
+    <color name="c_amber">#E09000</color>
+    <color name="c_ok">#27A882</color>
+
+
 </resources>

@@ -1,9 +1,20 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MediScan" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base app theme — used by AndroidManifest.xml -->
+    <style name="Theme.MediScan" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Status bar colour -->
+        <item name="android:statusBarColor">#1B7A5A</item>
+        <!-- Light status bar icons = false (white icons on dark green) -->
+        <item name="android:windowLightStatusBar">false</item>
+        <!-- No action bar -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- App background -->
+        <item name="android:windowBackground">#C5E3DC</item>
+        <!-- Primary colour for Material components -->
+        <item name="colorPrimary">#1B7A5A</item>
+        <item name="colorPrimaryVariant">#145F4B</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
     </style>
 
-    <style name="Theme.MediScan" parent="Base.Theme.MediScan" />
 </resources>
