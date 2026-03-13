@@ -1,28 +1,35 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MediScan" parent="Theme.Material3.Light.NoActionBar">
-        <item name="colorPrimary">@color/primary_dark_blue</item>
-        <item name="colorPrimaryVariant">@color/secondary_teal</item>
-        <item name="colorSecondary">@color/accent_teal</item>
-        <item name="colorSecondaryVariant">@color/bright_accent</item>
-        <item name="android:colorBackground">@color/background_color</item>
-        <item name="colorSurface">@color/card_background</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorOnSecondary">@color/white</item>
-        <item name="colorOnBackground">@color/text_dark</item>
-        <item name="android:statusBarColor">@color/primary_dark_blue</item>
-        <item name="android:navigationBarColor">@color/white</item>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base app theme — used by AndroidManifest.xml -->
+    <style name="Theme.MediScan" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Status bar colour -->
+        <item name="android:statusBarColor">#1B7A5A</item>
+        <!-- Light status bar icons = false (white icons on dark green) -->
+        <item name="android:windowLightStatusBar">false</item>
+        <!-- No action bar -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- App background -->
+        <item name="android:windowBackground">#C5E3DC</item>
+        <!-- Primary colour for Material components -->
+        <item name="colorPrimary">#1B7A5A</item>
+        <item name="colorPrimaryVariant">#145F4B</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
     </style>
 
-    <style name="Theme.MediScan" parent="Base.Theme.MediScan" />
-
-    <style name="Widget.MedScan.Chip" parent="Widget.Material3.Chip.Assist">
-        <item name="chipBackgroundColor">@color/chip_background</item>
-        <item name="android:textColor">@color/chip_text</item>
+    <!-- Splash screen theme — applied only to SplashActivity -->
+    <style name="Theme.MediScan.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Dark charcoal instantly on cold start — zero white flash -->
+        <item name="android:windowBackground">#1A1E24</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">#1A1E24</item>
+        <item name="android:navigationBarColor">#1A1E24</item>
+        <!-- false = white icons on dark background -->
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimary">#00D4C8</item>
     </style>
 
-    <style name="Widget.MedScan.Button.Primary" parent="Widget.Material3.Button">
-        <item name="backgroundTint">@color/accent_teal</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
 </resources>

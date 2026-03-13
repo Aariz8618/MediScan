@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Palette:
+      Background  : #1A1E24  (dark charcoal)
+      Orb bg      : #22282F  (slightly lighter charcoal card)
+      Cross       : #00D4C8  (vibrant cyan)
+      Accent dot  : #00D4C8
+      Scan beam   : #00D4C8  fade gradient
+      Text primary: #FFFFFF
+      Text sub    : #4A6570  (muted cyan-grey)
+      Version     : #2E3A42
+      Bottom bar  : #00D4C8  thin line
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1A1E24">
+
+    <!-- ── Single very faint cyan glow behind orb ── -->
+    <View
+        android:id="@+id/orbGlow"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:alpha="0"
+        android:background="@drawable/bg_orb_glow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvAppName"
+        android:layout_marginBottom="10dp" />
+
+    <!-- ════════════════════════════════════════
+         LOGO ORB — dead center-ish, upper half
+    ════════════════════════════════════════ -->
+    <FrameLayout
+        android:id="@+id/iconOrb"
+        android:layout_width="112dp"
+        android:layout_height="112dp"
+        android:alpha="0"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        android:background="@drawable/bg_splash_orb"
+        android:elevation="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvAppName"
+        android:layout_marginBottom="36dp">
+
+        <!-- Cross vertical — cyan -->
+        <View
+            android:layout_width="22dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_cross_arm" />
+
+        <!-- Cross horizontal — cyan -->
+        <View
+            android:layout_width="64dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_cross_arm" />
+
+        <!-- Center dot — dark, punched out -->
+        <View
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_pulse_dot" />
+
+    </FrameLayout>
+
+    <!-- ════════════════════════════════════════
+         APP NAME
+    ════════════════════════════════════════ -->
+    <TextView
+        android:id="@+id/tvAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MediScan"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        android:fontFamily="@font/playfair_display_semibold"
+        android:textStyle="bold"
+        android:letterSpacing="0.03"
+        android:alpha="0"
+        android:translationY="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="6dp" />
+
+    <!-- Tagline -->
+    <TextView
+        android:id="@+id/tvTagline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Health, AI‑Analyzed."
+        android:textColor="#4A6570"
+        android:textSize="12sp"
+        android:fontFamily="@font/dm_sans_regular"
+        android:letterSpacing="0.1"
+        android:alpha="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAppName"
+        android:layout_marginTop="10dp" />
+
+    <!-- ════════════════════════════════════════
+         BOTTOM — thin cyan line + version
+    ════════════════════════════════════════ -->
+
+    <!-- Thin cyan accent line -->
+    <View
+        android:id="@+id/cyanLine"
+        android:layout_width="40dp"
+        android:layout_height="2dp"
+        android:alpha="0"
+        android:background="#00D4C8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvVersion"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tvVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="v1.0"
+        android:textColor="#2E3A42"
+        android:textSize="10sp"
+        android:fontFamily="@font/dm_sans_regular"
+        android:letterSpacing="0.06"
+        android:alpha="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="40dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

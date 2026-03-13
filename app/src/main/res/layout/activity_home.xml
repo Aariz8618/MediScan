@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#DCF0EF">
+
+    <!-- ═══════════════════════════════════════════════════════
+         HERO — teal/dark-blue header
+         Greeting · Name · Stats
+    ════════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:id="@+id/heroSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="28dp"
+        android:paddingBottom="28dp"
+        android:background="@drawable/bg_hero_teal">
+
+        <!-- Greeting row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <!-- time-based greeting, set in code -->
+                <TextView
+                    android:id="@+id/tvGreeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Good morning,"
+                    android:textColor="#B2FFFFFF"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/dm_sans_regular" />
+
+                <!-- Full name from API -->
+                <TextView
+                    android:id="@+id/tvUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/dm_sans_bold"
+                    android:textStyle="bold"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+
+            <!-- Bell / notification icon -->
+            <FrameLayout
+                android:id="@+id/btnNotifications"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_notification_circle"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_bell"
+                    app:tint="#FFFFFF"
+                    android:contentDescription="Notifications" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <!-- Stats 3-col (inside hero, white cards) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#246E8A">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center">
+                    <TextView android:id="@+id/tvStatReports" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#FFFFFF" android:textSize="26sp" android:fontFamily="@font/dm_sans_bold" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="REPORTS" android:textColor="#8EC8DB" android:textSize="9sp" android:fontFamily="@font/dm_sans_bold" android:letterSpacing="0.07" android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#246E8A">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center">
+                    <TextView android:id="@+id/tvStatFlagged" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#F0A500" android:textSize="26sp" android:fontFamily="@font/dm_sans_bold" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="FLAGGED" android:textColor="#8EC8DB" android:textSize="9sp" android:fontFamily="@font/dm_sans_bold" android:letterSpacing="0.07" android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#246E8A">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center">
+                    <TextView android:id="@+id/tvStatAccuracy" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="–" android:textColor="#FFFFFF" android:textSize="26sp" android:fontFamily="@font/dm_sans_bold" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ACCURACY" android:textColor="#8EC8DB" android:textSize="9sp" android:fontFamily="@font/dm_sans_bold" android:letterSpacing="0.07" android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SCROLLABLE BODY
+    ════════════════════════════════════════════════════════ -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="never"
+        android:background="#DCF0EF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="20dp">
+
+            <!-- QUICK ACCESS label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="QUICK ACCESS"
+                android:textColor="#6B8883"
+                android:textSize="10sp"
+                android:fontFamily="@font/dm_sans_bold"
+                android:textStyle="bold"
+                android:letterSpacing="0.1"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Scan type chips row 1 -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="8dp">
+                <TextView android:id="@+id/chipLab" android:layout_width="wrap_content" android:layout_height="36dp" android:gravity="center" android:text="🧪 Lab" android:textColor="#FFFFFF" android:textSize="11sp" android:fontFamily="@font/dm_sans_bold" android:textStyle="bold" android:paddingStart="16dp" android:paddingEnd="16dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_chip_active" android:clickable="true" android:focusable="true" />
+                <TextView android:id="@+id/chipEcg" android:layout_width="wrap_content" android:layout_height="36dp" android:gravity="center" android:text="💓 ECG" android:textColor="#2C4A45" android:textSize="11sp" android:fontFamily="@font/dm_sans_bold" android:paddingStart="16dp" android:paddingEnd="16dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_chip_normal" android:clickable="true" android:focusable="true" />
+                <TextView android:id="@+id/chipMri" android:layout_width="wrap_content" android:layout_height="36dp" android:gravity="center" android:text="🧠 MRI" android:textColor="#2C4A45" android:textSize="11sp" android:fontFamily="@font/dm_sans_bold" android:paddingStart="16dp" android:paddingEnd="16dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_chip_normal" android:clickable="true" android:focusable="true" />
+                <TextView android:id="@+id/chipXray" android:layout_width="wrap_content" android:layout_height="36dp" android:gravity="center" android:text="🫁 X-Ray" android:textColor="#2C4A45" android:textSize="11sp" android:fontFamily="@font/dm_sans_bold" android:paddingStart="16dp" android:paddingEnd="16dp" android:background="@drawable/bg_chip_normal" android:clickable="true" android:focusable="true" />
+            </LinearLayout>
+
+            <!-- Scan type chips row 2 -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="24dp">
+                <TextView android:id="@+id/chipRetinal" android:layout_width="wrap_content" android:layout_height="36dp" android:gravity="center" android:text="👁️ Retinal" android:textColor="#2C4A45" android:textSize="11sp" android:fontFamily="@font/dm_sans_bold" android:paddingStart="16dp" android:paddingEnd="16dp" android:layout_marginEnd="8dp" android:background="@drawable/bg_chip_normal" android:clickable="true" android:focusable="true" />
+                <TextView android:id="@+id/chipRx" android:layout_width="wrap_content" android:layout_height="36dp" android:gravity="center" android:text="💊 Rx" android:textColor="#2C4A45" android:textSize="11sp" android:fontFamily="@font/dm_sans_bold" android:paddingStart="16dp" android:paddingEnd="16dp" android:background="@drawable/bg_chip_normal" android:clickable="true" android:focusable="true" />
+            </LinearLayout>
+
+            <!-- AI Analysis Ready Strip -->
+            <LinearLayout
+                android:id="@+id/cardAiInsight"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/bg_ai_insight_strip"
+                android:clickable="true"
+                android:focusable="true">
+
+                <FrameLayout android:layout_width="44dp" android:layout_height="44dp" android:background="@drawable/bg_ai_orb">
+                    <ImageView android:layout_width="22dp" android:layout_height="22dp" android:layout_gravity="center" android:src="@drawable/ic_robot" app:tint="#FFFFFF" android:contentDescription="AI" />
+                </FrameLayout>
+
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="14dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AI Analysis Ready" android:textColor="#FFFFFF" android:textSize="13sp" android:fontFamily="@font/dm_sans_bold" android:textStyle="bold" />
+                    <TextView android:id="@+id/tvInsightSub" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Your CBC report needs review" android:textColor="#99FFFFFF" android:textSize="11sp" android:fontFamily="@font/dm_sans_regular" android:layout_marginTop="3dp" />
+                </LinearLayout>
+
+                <ImageView android:layout_width="16dp" android:layout_height="16dp" android:src="@drawable/ic_arrow_right" app:tint="#CCFFFFFF" android:contentDescription="View" />
+            </LinearLayout>
+
+            <!-- RECENT REPORTS label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RECENT REPORTS"
+                android:textColor="#6B8883"
+                android:textSize="10sp"
+                android:fontFamily="@font/dm_sans_bold"
+                android:textStyle="bold"
+                android:letterSpacing="0.1"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Reports list container — shown once user has uploads -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/reportsListCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <LinearLayout
+                    android:id="@+id/reportsListContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp">
+
+                    <!-- CBC -->
+                    <LinearLayout android:id="@+id/reportCbc" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingStart="14dp" android:paddingEnd="14dp" android:paddingTop="14dp" android:paddingBottom="14dp" android:clickable="true" android:focusable="true">
+                        <FrameLayout android:layout_width="40dp" android:layout_height="40dp" android:background="@drawable/bg_report_icon_o"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🧪" android:textSize="18sp" /></FrameLayout>
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="12dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Complete Blood Count" android:textColor="#1C2B2A" android:textSize="13sp" android:fontFamily="@font/dm_sans_bold" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Today, 9:30 AM" android:textColor="#6B8883" android:textSize="11sp" android:fontFamily="@font/dm_sans_regular" android:layout_marginTop="3dp" />
+                        </LinearLayout>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Review" android:textColor="#E09000" android:textSize="10sp" android:fontFamily="@font/dm_sans_bold" android:textStyle="bold" android:paddingStart="9dp" android:paddingEnd="9dp" android:paddingTop="4dp" android:paddingBottom="4dp" android:background="@drawable/bg_badge_warn" />
+                    </LinearLayout>
+
+                    <!-- Divider -->
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginStart="66dp" android:layout_marginEnd="14dp" android:background="#F0F0F0" />
+
+                    <!-- ECG -->
+                    <LinearLayout android:id="@+id/reportEcg" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingStart="14dp" android:paddingEnd="14dp" android:paddingTop="14dp" android:paddingBottom="14dp" android:clickable="true" android:focusable="true">
+                        <FrameLayout android:layout_width="40dp" android:layout_height="40dp" android:background="@drawable/bg_report_icon_b"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="💓" android:textSize="18sp" /></FrameLayout>
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="12dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ECG Strip Analysis" android:textColor="#1C2B2A" android:textSize="13sp" android:fontFamily="@font/dm_sans_bold" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Yesterday, 2:45 PM" android:textColor="#6B8883" android:textSize="11sp" android:fontFamily="@font/dm_sans_regular" android:layout_marginTop="3dp" />
+                        </LinearLayout>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Normal" android:textColor="#27A882" android:textSize="10sp" android:fontFamily="@font/dm_sans_bold" android:textStyle="bold" android:paddingStart="9dp" android:paddingEnd="9dp" android:paddingTop="4dp" android:paddingBottom="4dp" android:background="@drawable/bg_badge_ok" />
+                    </LinearLayout>
+
+                    <!-- Divider -->
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginStart="66dp" android:layout_marginEnd="14dp" android:background="#F0F0F0" />
+
+                    <!-- MRI -->
+                    <LinearLayout android:id="@+id/reportMri" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingStart="14dp" android:paddingEnd="14dp" android:paddingTop="14dp" android:paddingBottom="14dp" android:clickable="true" android:focusable="true">
+                        <FrameLayout android:layout_width="40dp" android:layout_height="40dp" android:background="@drawable/bg_report_icon_p"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🧠" android:textSize="18sp" /></FrameLayout>
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="12dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Brain MRI Scan" android:textColor="#1C2B2A" android:textSize="13sp" android:fontFamily="@font/dm_sans_bold" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mar 4, 11:00 AM" android:textColor="#6B8883" android:textSize="11sp" android:fontFamily="@font/dm_sans_regular" android:layout_marginTop="3dp" />
+                        </LinearLayout>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Clear" android:textColor="#27A882" android:textSize="10sp" android:fontFamily="@font/dm_sans_bold" android:textStyle="bold" android:paddingStart="9dp" android:paddingEnd="9dp" android:paddingTop="4dp" android:paddingBottom="4dp" android:background="@drawable/bg_badge_ok" />
+                    </LinearLayout>
+
+                    <!-- Divider -->
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginStart="66dp" android:layout_marginEnd="14dp" android:background="#F0F0F0" />
+
+                    <!-- X-Ray -->
+                    <LinearLayout android:id="@+id/reportXray" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingStart="14dp" android:paddingEnd="14dp" android:paddingTop="14dp" android:paddingBottom="14dp" android:clickable="true" android:focusable="true">
+                        <FrameLayout android:layout_width="40dp" android:layout_height="40dp" android:background="@drawable/bg_report_icon_g"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🫁" android:textSize="18sp" /></FrameLayout>
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="12dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Chest X-Ray PA View" android:textColor="#1C2B2A" android:textSize="13sp" android:fontFamily="@font/dm_sans_bold" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mar 3, 3:00 PM" android:textColor="#6B8883" android:textSize="11sp" android:fontFamily="@font/dm_sans_regular" android:layout_marginTop="3dp" />
+                        </LinearLayout>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Note" android:textColor="#E09000" android:textSize="10sp" android:fontFamily="@font/dm_sans_bold" android:textStyle="bold" android:paddingStart="9dp" android:paddingEnd="9dp" android:paddingTop="4dp" android:paddingBottom="4dp" android:background="@drawable/bg_badge_warn" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Empty state — shown when user has NO uploads yet -->
+            <LinearLayout
+                android:id="@+id/emptyReportsState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingTop="28dp"
+                android:paddingBottom="28dp"
+                android:visibility="gone">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📋" android:textSize="44sp" android:layout_marginBottom="14dp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="No reports yet" android:textColor="#2C4A45" android:textSize="15sp" android:fontFamily="@font/dm_sans_bold" android:textStyle="bold" android:gravity="center" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Upload your first medical report\nand AI will analyze it instantly." android:textColor="#6B8883" android:textSize="12sp" android:fontFamily="@font/dm_sans_regular" android:gravity="center" android:lineSpacingMultiplier="1.5" android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

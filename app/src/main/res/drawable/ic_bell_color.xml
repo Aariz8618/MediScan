@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp"
+    android:height="20dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Bell body -->
+    <path
+        android:pathData="M5,10 C5,6.69 8.13,4 12,4 C15.87,4 19,6.69 19,10 L19,17 L5,17 Z"
+        android:fillColor="#5BA4CF" />
+    <!-- Bell bottom rim (rect x=3 y=16 w=18 h=2 rx=1 → rounded rect path) -->
+    <path
+        android:pathData="M4,16 L20,16 C20.55,16 21,16.45 21,17 L21,17 C21,17.55 20.55,18 20,18 L4,18 C3.45,18 3,17.55 3,17 L3,17 C3,16.45 3.45,16 4,16 Z"
+        android:fillColor="#4A8FB8" />
+    <!-- Clapper arc -->
+    <path
+        android:pathData="M10,18 C10,19.1 10.9,20 12,20 C13.1,20 14,19.1 14,18"
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#4A8FB8"
+        android:strokeWidth="2"
+        android:strokeLineCap="round" />
+</vector>
