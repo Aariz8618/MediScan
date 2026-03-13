@@ -1,0 +1,1255 @@
+<!--
+        MedScan — Chest X-Ray Analysis Screen
+        Layout  : fragment_xray_analysis.xml
+        Package : res/layout/
+        Colors  : #05668d (primary) · #028090 (secondary) · #02c39a (accent)
+                  #D4860A (warn) · #CC3333 (danger) · #2A9D5C (ok)
+     -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E8F4F2">
+    <!--  ══════════════════════════════════════════
+             DARK HEADER  (.ah)
+             Background : #05668D
+        ══════════════════════════════════════════  -->
+    <LinearLayout
+        android:id="@+id/layoutHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#05668D"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="13dp"
+        android:paddingBottom="15dp"
+        android:elevation="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <!--  Back Row  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="11dp">
+            <!--  Back Button (.back-btn)  -->
+            <FrameLayout
+                android:id="@+id/btnBack"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/bg_back_button"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_arrow_back"
+                    android:contentDescription="Back" />
+            </FrameLayout>
+            <!--  Screen Title (.ah-title)  -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="9dp"
+                android:text="Chest X-Ray"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:letterSpacing="-0.01" />
+            <!--  AI Badge (.ai-badge) — "CheXNet"  -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CheXNet"
+                android:textColor="#D9FFFFFF"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.06"
+                android:background="@drawable/bg_ai_badge"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp" />
+        </LinearLayout>
+        <!--  Meta Card (.meta-card)  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_meta_card"
+            android:paddingStart="11dp"
+            android:paddingEnd="11dp"
+            android:paddingTop="9dp"
+            android:paddingBottom="9dp">
+            <!--  Lung Icon Container (.meta-ico)  -->
+            <FrameLayout
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/bg_meta_icon"
+                android:layout_marginEnd="9dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="🫁"
+                    android:textSize="15sp" />
+            </FrameLayout>
+            <!--  Meta Text  -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <!--  .meta-t  -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PA Chest Radiograph"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <!--  .meta-s  -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Image · 18 conditions screened"
+                    android:textColor="#8CFFFFFF"
+                    android:textSize="10sp"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <!--  ══════════════════════════════════════════
+             VIEW TOGGLE BAR  (.view-toggle-bar)
+             Background : #FFFFFF
+             Border-bottom : 1dp #D0EEEA
+        ══════════════════════════════════════════  -->
+    <LinearLayout
+        android:id="@+id/layoutViewToggle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_toggle_bar"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/layoutHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <!--  "View as:" label  -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="View as:"
+            android:textColor="#6B8A8D"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+        <!--  Toggle Pill Container (.vtoggle)  -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_toggle_container"
+            android:padding="2dp">
+            <!--  Patient (ACTIVE)  -->
+            <TextView
+                android:id="@+id/btnPatientView"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:gravity="center"
+                android:text="Patient"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_toggle_active"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:clickable="true"
+                android:focusable="true" />
+            <!--  Doctor (inactive)  -->
+            <TextView
+                android:id="@+id/btnDoctorView"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:gravity="center"
+                android:text="Doctor"
+                android:textColor="#6B8A8D"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:background="@android:color/transparent"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
+    </LinearLayout>
+    <!--  ══════════════════════════════════════════
+             SCROLLABLE CONTENT BODY
+        ══════════════════════════════════════════  -->
+    <ScrollView
+        android:id="@+id/scrollBody"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/layoutViewToggle"
+        app:layout_constraintBottom_toTopOf="@id/layoutBottomNav"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--  ══════════════════════════════════════════
+                             PATIENT VIEW PANEL  (#xray-patient)
+                             Padding : 11dp all
+                        ══════════════════════════════════════════  -->
+            <LinearLayout
+                android:id="@+id/panelPatient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="11dp"
+                android:visibility="visible">
+                <!--  ── 1. STATUS WARNING CARD ──  -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="9dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="1dp"
+                    app:strokeColor="#D0EEEA"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="10dp">
+                        <!--  ⚠️ Icon Box  -->
+                        <FrameLayout
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:background="@drawable/bg_warn_icon_box"
+                            android:layout_marginEnd="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="⚠️"
+                                android:textSize="18sp" />
+                        </FrameLayout>
+                        <!--  Text block  -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Something Needs Attention"
+                                android:textColor="#D4860A"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Please see a doctor for confirmation"
+                                android:textColor="#6B8A8D"
+                                android:textSize="10sp"
+                                android:layout_marginTop="2dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <!--  ── 2. SCAN BOX (.scan-box) ──  -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/bg_scan_box"
+                    android:layout_marginBottom="9dp">
+                    <!--  X-Ray vector illustration  -->
+                    <ImageView
+                        android:id="@+id/ivXrayScan"
+                        android:layout_width="125dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_xray_chest"
+                        android:alpha="0.8"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="PA Chest Radiograph" />
+                    <!--  "REVIEW" badge top-right  -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|end"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="REVIEW"
+                        android:textColor="#FFFFFF"
+                        android:textSize="9sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.04"
+                        android:background="@drawable/bg_review_badge"
+                        android:paddingStart="7dp"
+                        android:paddingEnd="7dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp" />
+                    <!--  "PA View" label bottom-left (.scan-label)  -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|start"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginBottom="7dp"
+                        android:text="PA View"
+                        android:textColor="#B4C8E6"
+                        android:textSize="9sp"
+                        android:textStyle="bold"
+                        android:background="@drawable/bg_scan_label"
+                        android:paddingStart="7dp"
+                        android:paddingEnd="7dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp" />
+                </FrameLayout>
+                <!--  ── 3. WHAT WAS FOUND CARD ──  -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="9dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="1dp"
+                    app:strokeColor="#D0EEEA"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="14dp">
+                        <!--  Section Label (.sec-lbl)  -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="WHAT WAS FOUND"
+                            android:textColor="#6B8A8D"
+                            android:textSize="9sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.09"
+                            android:layout_marginBottom="7dp" />
+                        <!--  Finding 1 — Danger (Pneumonia)  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="top"
+                            android:layout_marginBottom="5dp">
+
+                            <View
+                                android:layout_width="8dp"
+                                android:layout_height="8dp"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginEnd="7dp"
+                                android:background="@drawable/dot_danger" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="#028090"
+                                android:textSize="11sp"
+                                android:lineSpacingMultiplier="1.5"
+                                android:text="<b>Pneumonia:</b> Signs of possible lung infection found (72% probability)" />
+                        </LinearLayout>
+                        <!--  Finding 2 — Warning (Infiltration)  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="top"
+                            android:layout_marginBottom="5dp">
+
+                            <View
+                                android:layout_width="8dp"
+                                android:layout_height="8dp"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginEnd="7dp"
+                                android:background="@drawable/dot_warn" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="#028090"
+                                android:textSize="11sp"
+                                android:lineSpacingMultiplier="1.5"
+                                android:text="<b>Infiltration:</b> Some cloudiness in lung area (44% probability)" />
+                        </LinearLayout>
+                        <!--  Finding 3 — OK (Normal)  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="top">
+
+                            <View
+                                android:layout_width="8dp"
+                                android:layout_height="8dp"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginEnd="7dp"
+                                android:background="@drawable/dot_ok" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="#028090"
+                                android:textSize="11sp"
+                                android:lineSpacingMultiplier="1.5"
+                                android:text="Heart size and bone structure look normal" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <!--  ── 4. ALERT WARNING BANNER (.alert-w) ──  -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="top"
+                    android:background="@drawable/alert_warning"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:layout_marginBottom="9dp">
+
+                    <ImageView
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="2dp"
+                        android:src="@drawable/ic_info_circle"
+                        android:contentDescription="Warning"
+                        app:tint="#D4860A" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#7A4A00"
+                        android:textSize="11sp"
+                        android:lineSpacingMultiplier="1.55"
+                        android:text="This is an <b>AI screening only</b>, not a diagnosis. See a doctor to confirm." />
+                </LinearLayout>
+                <!--  ── 5. AI EXPLANATION CARD (.ai-card) ──  -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="9dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="1dp"
+                    app:strokeColor="#D0EEEA"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="11dp">
+                        <!--  AI Card Header (.ai-hdr)  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="6dp">
+                            <!--  "AI" tag (.ai-tag2)  -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="AI"
+                                android:textColor="#FFFFFF"
+                                android:textSize="9sp"
+                                android:textStyle="bold"
+                                android:letterSpacing="0.04"
+                                android:background="@drawable/bg_ai_tag"
+                                android:paddingStart="6dp"
+                                android:paddingEnd="6dp"
+                                android:paddingTop="2dp"
+                                android:paddingBottom="2dp"
+                                android:layout_marginEnd="6dp" />
+                            <!--  Card title (.ai-card-title)  -->
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="What This Means for You"
+                                android:textColor="#05668D"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                        <!--  AI body text  -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Your chest X-ray shows signs that could be a lung infection (pneumonia). Your lungs have some cloudiness that wasn't expected. Please see a doctor as soon as possible for proper confirmation and treatment."
+                            android:textColor="#028090"
+                            android:textSize="11sp"
+                            android:lineSpacingMultiplier="1.65" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <!--  ── 6. NEXT STEPS CARD (.next-card) ──  -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="9dp"
+                    app:cardBackgroundColor="#F0F9F8"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="#D0EEEA"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingStart="11dp"
+                        android:paddingEnd="11dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp">
+                        <!--  Section title (.next-title)  -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="WHAT TO DO NEXT"
+                            android:textColor="#05668D"
+                            android:textSize="9sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.06"
+                            android:layout_marginBottom="6dp" />
+                        <!--  Step 1  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="top"
+                            android:layout_marginBottom="5dp">
+
+                            <TextView
+                                android:layout_width="20dp"
+                                android:layout_height="wrap_content"
+                                android:text="👨‍⚕️"
+                                android:textSize="12sp"
+                                android:layout_marginEnd="7dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Visit a doctor soon — within 1–2 days"
+                                android:textColor="#028090"
+                                android:textSize="11sp"
+                                android:lineSpacingMultiplier="1.5" />
+                        </LinearLayout>
+                        <!--  Step 2  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="top"
+                            android:layout_marginBottom="5dp">
+
+                            <TextView
+                                android:layout_width="20dp"
+                                android:layout_height="wrap_content"
+                                android:text="😷"
+                                android:textSize="12sp"
+                                android:layout_marginEnd="7dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Rest and avoid contact with others"
+                                android:textColor="#028090"
+                                android:textSize="11sp"
+                                android:lineSpacingMultiplier="1.5" />
+                        </LinearLayout>
+                        <!--  Step 3  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="top">
+
+                            <TextView
+                                android:layout_width="20dp"
+                                android:layout_height="wrap_content"
+                                android:text="💧"
+                                android:textSize="12sp"
+                                android:layout_marginEnd="7dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Stay hydrated and monitor your temperature"
+                                android:textColor="#028090"
+                                android:textSize="11sp"
+                                android:lineSpacingMultiplier="1.5" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <!--  ── 7. SHARE WITH DOCTOR BUTTON (.share-btn) ──  -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnShareDoctor"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:text="Share with Doctor"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.01"
+                    app:backgroundTint="#02C39A"
+                    app:cornerRadius="8dp"
+                    app:icon="@drawable/ic_send"
+                    app:iconTint="#FFFFFF"
+                    app:iconGravity="textStart"
+                    app:iconPadding="7dp" />
+            </LinearLayout>
+            <!--  END PATIENT PANEL  -->
+            <!--  ══════════════════════════════════════════
+                             DOCTOR VIEW PANEL  (#xray-doctor)
+                             Visibility : gone by default  (toggled in code)
+                        ══════════════════════════════════════════  -->
+            <LinearLayout
+                android:id="@+id/panelDoctor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="11dp"
+                android:visibility="gone">
+                <!--  ── SHARED PATIENT STRIP (.shared-strip) ──  -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="9dp"
+                    app:cardBackgroundColor="#F0F9F8"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="#D0EEEA"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="11dp"
+                        android:paddingEnd="11dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp">
+                        <!--  Avatar (.shared-av)  -->
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:gravity="center"
+                            android:text="A"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:background="@drawable/bg_avatar"
+                            android:layout_marginEnd="8dp" />
+                        <!--  Name + sub  -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Aarav Shah, M 28"
+                                android:textColor="#05668D"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Shared · Mar 6, 2026 · Encrypted"
+                                android:textColor="#6B8A8D"
+                                android:textSize="10sp"
+                                android:layout_marginTop="1dp" />
+                        </LinearLayout>
+                        <!--  Lock icon (.shared-lock)  -->
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:src="@drawable/ic_lock"
+                            android:contentDescription="Encrypted"
+                            app:tint="#05668D" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <!--  ── PATHOLOGY SCREENING CARD (.doc-section) ──  -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="9dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="1dp"
+                    app:strokeColor="#D0EEEA"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="11dp">
+                        <!--  Section title (.doc-section-title)  -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="PATHOLOGY SCREENING (18 CLASSES)"
+                            android:textColor="#6B8A8D"
+                            android:textSize="9sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.09"
+                            android:layout_marginBottom="8dp" />
+                        <!--  Divider  -->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#F0F9F8"
+                            android:layout_marginBottom="4dp" />
+                        <!--  Pneumonia — DANGER (hi)  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Pneumonia"
+                                android:textColor="#028090"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="72% — Flagged for review"
+                                android:textColor="#CC3333"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#F0F9F8" />
+                        <!--  Infiltration — DANGER (hi)  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Infiltration"
+                                android:textColor="#028090"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="44% — Borderline positive"
+                                android:textColor="#CC3333"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#F0F9F8" />
+                        <!--  Consolidation — normal  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Consolidation"
+                                android:textColor="#028090"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="18% — Low probability"
+                                android:textColor="#05668D"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#F0F9F8" />
+                        <!--  Pleural Effusion — normal  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Pleural Effusion"
+                                android:textColor="#028090"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="9% — Unlikely"
+                                android:textColor="#05668D"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#F0F9F8" />
+                        <!--  Cardiomegaly — OK (ok)  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Cardiomegaly"
+                                android:textColor="#028090"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="8% — Cardiac silhouette normal"
+                                android:textColor="#2A9D5C"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#F0F9F8" />
+                        <!--  All Others — OK  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingTop="5dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="All Others (12)"
+                                android:textColor="#028090"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="<5% each"
+                                android:textColor="#2A9D5C"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <!--  ── CLINICAL NOTE (.doc-note) ──  -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="9dp"
+                    app:cardBackgroundColor="#F0F9F8"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="#D0EEEA"
+                    app:strokeWidth="1dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="#05668D"
+                        android:textSize="11sp"
+                        android:lineSpacingMultiplier="1.6"
+                        android:text="<b>AI Clinical Note (DenseNet121):</b> Right lower lobe opacity pattern consistent with community-acquired pneumonia. Recommend PA + lateral for better characterization. CBC with differential and CRP/procalcitonin may help confirm infectious etiology." />
+                </com.google.android.material.card.MaterialCardView>
+                <!--  ── SUGGESTED NEXT STEPS (.doc-recommendation) ──  -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="9dp"
+                    app:cardBackgroundColor="#F0F9F8"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="#D0EEEA"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="9dp"
+                        android:paddingBottom="9dp">
+                        <!--  Title (.doc-rec-title)  -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SUGGESTED NEXT STEPS"
+                            android:textColor="#05668D"
+                            android:textSize="9sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.03"
+                            android:layout_marginBottom="6dp" />
+                        <!--  Step 1  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="top"
+                            android:layout_marginBottom="4dp">
+
+                            <TextView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:gravity="center"
+                                android:text="1"
+                                android:textColor="#FFFFFF"
+                                android:textSize="9sp"
+                                android:textStyle="bold"
+                                android:background="@drawable/bg_step_number"
+                                android:layout_marginEnd="6dp"
+                                android:layout_marginTop="1dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="PA + lateral view for improved localization"
+                                android:textColor="#028090"
+                                android:textSize="11sp"
+                                android:lineSpacingMultiplier="1.5" />
+                        </LinearLayout>
+                        <!--  Step 2  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="top"
+                            android:layout_marginBottom="4dp">
+
+                            <TextView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:gravity="center"
+                                android:text="2"
+                                android:textColor="#FFFFFF"
+                                android:textSize="9sp"
+                                android:textStyle="bold"
+                                android:background="@drawable/bg_step_number"
+                                android:layout_marginEnd="6dp"
+                                android:layout_marginTop="1dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="CBC differential + CRP/procalcitonin"
+                                android:textColor="#028090"
+                                android:textSize="11sp"
+                                android:lineSpacingMultiplier="1.5" />
+                        </LinearLayout>
+                        <!--  Step 3  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="top"
+                            android:layout_marginBottom="4dp">
+
+                            <TextView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:gravity="center"
+                                android:text="3"
+                                android:textColor="#FFFFFF"
+                                android:textSize="9sp"
+                                android:textStyle="bold"
+                                android:background="@drawable/bg_step_number"
+                                android:layout_marginEnd="6dp"
+                                android:layout_marginTop="1dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Empirical antibiotic therapy per local protocol"
+                                android:textColor="#028090"
+                                android:textSize="11sp"
+                                android:lineSpacingMultiplier="1.5" />
+                        </LinearLayout>
+                        <!--  Step 4  -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="top">
+
+                            <TextView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:gravity="center"
+                                android:text="4"
+                                android:textColor="#FFFFFF"
+                                android:textSize="9sp"
+                                android:textStyle="bold"
+                                android:background="@drawable/bg_step_number"
+                                android:layout_marginEnd="6dp"
+                                android:layout_marginTop="1dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Repeat CXR at 4–6 weeks post-treatment"
+                                android:textColor="#028090"
+                                android:textSize="11sp"
+                                android:lineSpacingMultiplier="1.5" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+            <!--  END DOCTOR PANEL  -->
+        </LinearLayout>
+    </ScrollView>
+    <!--  ══════════════════════════════════════════
+             BOTTOM NAVIGATION BAR  (.bnav)
+             Background : #FFFFFF
+             Border-top  : 1dp #D0EEEA
+        ══════════════════════════════════════════  -->
+    <LinearLayout
+        android:id="@+id/layoutBottomNav"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_bottom_nav"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <!--  Home Tab  -->
+        <LinearLayout
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <FrameLayout
+                android:layout_width="40dp"
+                android:layout_height="24dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_nav_home"
+                    android:contentDescription="Home"
+                    app:tint="#78909C" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:textColor="#78909C"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+        <!--  Reports Tab — ACTIVE  -->
+        <LinearLayout
+            android:id="@+id/navReports"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:clickable="true"
+            android:focusable="true">
+            <!--  Active pill background  -->
+            <FrameLayout
+                android:layout_width="40dp"
+                android:layout_height="24dp"
+                android:background="@drawable/bg_nav_active_pill">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_nav_reports"
+                    android:contentDescription="Reports"
+                    app:tint="#05668D" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reports"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:textColor="#05668D"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+        <!--  Analyze Tab  -->
+        <LinearLayout
+            android:id="@+id/navAnalyze"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <FrameLayout
+                android:layout_width="40dp"
+                android:layout_height="24dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_nav_analysis"
+                    android:contentDescription="Analyze"
+                    app:tint="#78909C" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Analyze"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:textColor="#78909C"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+        <!--  Profile Tab  -->
+        <LinearLayout
+            android:id="@+id/navProfile"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <FrameLayout
+                android:layout_width="40dp"
+                android:layout_height="24dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_nav_profile"
+                    android:contentDescription="Profile"
+                    app:tint="#78909C" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:textColor="#78909C"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

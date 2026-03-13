@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="125dp" android:height="90dp"
+    android:viewportWidth="130" android:viewportHeight="96">
+
+    <!-- Outer chest silhouette -->
+    <path android:fillColor="@android:color/transparent"
+        android:strokeColor="#3A5A7A" android:strokeWidth="1.5"
+        android:pathData="M65,13 A47,39 0 1 1 18,52 A47,39 0 0 1 65,13 Z" />
+
+    <!-- Left lung lobe -->
+    <path android:fillColor="#1A508CB4"
+        android:strokeColor="#4A7AAA" android:strokeWidth="1"
+        android:pathData="M44,34 A15,22 0 1 1 29,56 A15,22 0 0 1 44,34 Z" />
+
+    <!-- Right lung lobe -->
+    <path android:fillColor="#1A508CB4"
+        android:strokeColor="#4A7AAA" android:strokeWidth="1"
+        android:pathData="M86,34 A15,22 0 1 1 71,56 A15,22 0 0 1 86,34 Z" />
+
+    <!-- Opacity / pneumonia area (right lower lobe) — red tint -->
+    <path android:fillColor="#33C85050"
+        android:strokeColor="#C07070" android:strokeWidth="1"
+        android:pathData="M60,50 A10,12 0 1 1 50,62 A10,12 0 0 1 60,50 Z" />
+
+    <!-- Spine midline (dashed approximated with thin line) -->
+    <path android:fillColor="@android:color/transparent"
+        android:strokeColor="#6A8AAA" android:strokeWidth="1.5"
+        android:pathData="M65,16 L65,90" />
+</vector>
