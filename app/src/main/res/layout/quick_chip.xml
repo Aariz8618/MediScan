@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- quick_chip.xml — reusable quick access chip for home screen -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="8dp"
+    android:layout_margin="4dp">
+
+    <ImageView
+        android:id="@+id/iv_chip_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_icon_teal"
+        android:padding="10dp"
+        android:src="@drawable/ic_lab"
+        android:contentDescription="@null" />
+
+    <TextView
+        android:id="@+id/tv_chip_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Lab"
+        android:textColor="@color/text_primary"
+        android:textSize="11sp"
+        android:gravity="center" />
+
+</LinearLayout>
