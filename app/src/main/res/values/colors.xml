@@ -1,5 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!-- ── Login Screen ───────────────────────────────── -->
+    <color name="hero_top">#1B6B52</color>
+    <color name="hero_mid">#227A5E</color>
+    <color name="hero_bottom">#2E9E76</color>
+    <color name="screen_mint">#C5E3DC</color>
+    <color name="primary_teal">#2A9E78</color>
+    <color name="primary_dark">#1D7A5A</color>
+    <color name="input_bg">#FFFFFF</color>
+    <color name="border_email">#2A9E78</color>
+    <color name="border_normal">#D0E4E0</color>
+    <color name="text_dark">#2C4A45</color>
+    <color name="text_muted">#7AA09A</color>
+    <color name="text_placeholder">#9BBFB8</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="text_tagline">#C0FFFFFF</color>
+    <color name="logo_fill">#33FFFFFF</color>
+    <color name="logo_border">#59FFFFFF</color>
+    <color name="divider">#B0D0C8</color>
+
+    <!-- ── Brand ──────────────────────────────────────── -->
+    <color name="ic_green">#1A7F64</color>
+    <color name="ic_green_dark">#0C5038</color>
+    <color name="ic_green_light">#E8F5F1</color>
+
+    <!-- ── Text ──────────────────────────────────────── -->
+    <color name="ic_txt">#1C2B2A</color>
+    <color name="ic_muted">#6B8883</color>
+    <color name="ic_muted2">#4A7A71</color>
+
+    <!-- ── App background ────────────────────────────── -->
+    <color name="ic_bg">#EBF2F0</color>
+    <color name="ic_white">#FFFFFF</color>
+
+    <!-- ── Card / Surface ────────────────────────────── -->
+    <color name="ic_card">#FFFFFF</color>
+    <color name="ic_card_border">#DCEAE7</color>
+
+    <!-- ── Flag pills ─────────────────────────────────── -->
+    <color name="ic_flag_hi_bg">#FFE8E8</color>
+    <color name="ic_flag_hi_txt">#E05252</color>
+    <color name="ic_flag_lo_bg">#E3F0FB</color>
+    <color name="ic_flag_lo_txt">#2196C4</color>
+    <color name="ic_flag_ok_bg">#E0F5EF</color>
+    <color name="ic_flag_ok_txt">#27A882</color>
+
+    <!-- ── Alerts ─────────────────────────────────────── -->
+    <color name="ic_warn_bg">#FFF8E8</color>
+    <color name="ic_warn_border">#F5D88A</color>
+    <color name="ic_warn_txt">#7A5500</color>
+    <color name="ic_danger_bg">#FFF3F3</color>
+    <color name="ic_danger_border">#F5CCCC</color>
+    <color name="ic_danger_txt">#7A1A1A</color>
+
+    <!-- ── Processing steps ───────────────────────────── -->
+    <color name="ic_step_done_bg">#E8F5F1</color>
+    <color name="ic_step_pending_bg">#E0ECEA</color>
+
+    <!-- ── Upload zone ────────────────────────────────── -->
+    <color name="ic_upload_zone_bg">#F5FAF8</color>
+
+    <!-- ── Privacy card ───────────────────────────────── -->
+    <color name="ic_privacy_bg">#EDF7F4</color>
+
+    <!-- ── Report type icon backgrounds ──────────────── -->
+    <color name="ic_lab_bg">#FFF4E0</color>
+    <color name="ic_ecg_bg">#E3F0FB</color>
+    <color name="ic_mri_bg">#F0EBFA</color>
+    <color name="ic_xray_bg">#E8F5F1</color>
+    <color name="ic_ct_bg">#E8F3FF</color>
+    <color name="ic_eye_bg">#FEF0E8</color>
+    <color name="ic_rx_bg">#F0EBFA</color>
+
+    <!-- ── Table ──────────────────────────────────────── -->
+    <color name="ic_tbl_row_abn">#FFF8F8</color>
+    <color name="ic_divider">#DCEAE7</color>
+
+    <!-- ── Bottom nav ────────────────────────────────── -->
+    <color name="ic_nav_active">#1B7A5A</color>
+    <color name="ic_nav_inactive">#A0B5B1</color>
+
+    <!-- ── Status bar ────────────────────────────────── -->
+    <color name="ic_status_bar">#1B7A5A</color>
+    <color name="c_red">#E05252</color>
+    <color name="c_amber">#E09000</color>
+    <color name="c_ok">#27A882</color>
+
+    <!-- ── Home Screen Hero ──────────────────────────── -->
+    <color name="home_hero_bg">#2C7A96</color>          <!-- flat medium teal -->
+    <color name="home_stat_card_bg">#225F77</color>     <!-- slightly darker teal cards -->
+    <color name="home_stat_label">#8EC8DB</color>       <!-- light blue-white label -->
+    <color name="home_notification_bg">#246E8A</color>  <!-- rounded square bell button -->
+
+    <!-- ── Home Screen Page bg ───────────────────────── -->
+    <color name="home_page_bg">#EEF7F9</color>
+
+    <!-- ── Home AI Strip ─────────────────────────────── -->
+    <color name="home_ai_strip_bg">#236B5C</color>      <!-- solid dark teal-green -->
+    <color name="home_ai_orb_bg">#33FFFFFF</color>
+
+    <!-- ── Home Stat: Flagged ────────────────────────── -->
+    <color name="home_stat_flagged">#F0A500</color>
+
+    <!-- ── Home Chip Active ──────────────────────────── -->
+    <color name="home_chip_active_bg">#236B5C</color>
+
+    <!-- ── Home Badges ───────────────────────────────── -->
+    <color name="home_badge_warn_bg">#FFF3CD</color>
+    <color name="home_badge_ok_bg">#E0F7EF</color>
+
+
+    <!-- ── Reports Screen ────────────────────────────── -->
+    <color name="reports_title">#1A5F72</color>          <!-- "My Reports" teal -->
+    <color name="reports_subtitle">#4A7A71</color>       <!-- "24 reports · 3 need review" -->
+    <color name="reports_tab_active">#1A8C6E</color>     <!-- active tab text + underline -->
+    <color name="reports_tab_inactive">#6B8883</color>   <!-- inactive tab text -->
+    <color name="reports_search_bg">#E8F5F3</color>      <!-- search bar fill -->
+    <color name="reports_page_bg">#EEF7F9</color>        <!-- page background -->
+
+    <!-- ── Report Card ───────────────────────────────── -->
+    <color name="card_title">#1A5F72</color>             <!-- report name teal -->
+    <color name="card_date">#6B8883</color>              <!-- date/hospital muted -->
+    <color name="card_metric_teal">#1A5F72</color>       <!-- metric val 1 & 3 -->
+    <color name="card_metric_red">#E05252</color>        <!-- flags / high values -->
+    <color name="card_metric_green">#1A8C6E</color>      <!-- normal / sinus -->
+    <color name="card_metric_label">#6B8883</color>      <!-- metric label below -->
+    <color name="card_divider">#DCEAE7</color>           <!-- hairline divider -->
+
+    <!-- ── Report Badges ─────────────────────────────── -->
+    <color name="bdg_amber_bg">#FFF3CD</color>
+    <color name="bdg_amber_txt">#E09000</color>          <!-- Review / Note -->
+    <color name="bdg_green_bg">#E0F7EF</color>
+    <color name="bdg_green_border">#B2EAD8</color>
+    <color name="bdg_green_txt">#27A882</color>          <!-- Normal / Clear -->
+
 </resources>

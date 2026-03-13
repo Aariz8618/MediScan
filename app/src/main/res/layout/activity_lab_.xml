@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEF7F9">
+
+    <!-- HEADER -->
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#2C7A96"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="14dp">
+
+            <FrameLayout
+                android:id="@+id/btnBack"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:background="@drawable/bg_notification_circle"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginEnd="12dp">
+                <ImageView android:layout_width="16dp" android:layout_height="16dp" android:layout_gravity="center" android:src="@drawable/ic_back" app:tint="#FFFFFF" android:contentDescription="Back"/>
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Lab Report"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/dm_sans_bold"/>
+
+            <TextView
+                android:id="@+id/aiBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_claude_badge"
+                android:text="Claude AI"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/dm_sans_bold"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/metaCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_meta_card"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="14dp">
+
+            <FrameLayout
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="@drawable/bg_file_icon_box"
+                android:layout_marginEnd="12dp">
+                <ImageView android:layout_width="18dp" android:layout_height="18dp" android:layout_gravity="center" android:src="@drawable/ic_file_upload" android:contentDescription="File"/>
+            </FrameLayout>
+
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView android:id="@+id/tvReportName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Complete Blood Count" android:textColor="#FFFFFF" android:textSize="14sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                <TextView android:id="@+id/tvReportMeta" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PDF Report · Mar 6, 2026" android:textColor="#AAFFFFFF" android:textSize="11sp" android:fontFamily="@font/dm_sans_regular" android:layout_marginTop="2dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- BODY -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="24dp">
+
+            <!-- View as: Patient | Doctor toggle -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="#FFFFFF"
+                android:padding="14dp"
+                android:layout_marginBottom="14dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="View as:"
+                    android:textColor="#6B8883"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/dm_sans_regular"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_toggle_container"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:id="@+id/btnPatient"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_toggle_active"
+                        android:text="Patient"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/dm_sans_bold"
+                        android:paddingStart="18dp"
+                        android:paddingEnd="18dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:clickable="true"
+                        android:focusable="true"/>
+
+                    <TextView
+                        android:id="@+id/btnDoctor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:text="Doctor"
+                        android:textColor="#6B8883"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/dm_sans_regular"
+                        android:paddingStart="18dp"
+                        android:paddingEnd="18dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:clickable="true"
+                        android:focusable="true"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- ═══════ PATIENT VIEW ═══════ -->
+            <LinearLayout
+                android:id="@+id/patientView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <!-- Attention banner -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_attention_card"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:layout_marginBottom="12dp">
+
+                    <FrameLayout
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/bg_warn_icon_circle"
+                        android:layout_marginEnd="12dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="⚠️" android:textSize="20sp"/>
+                    </FrameLayout>
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:id="@+id/tvAttentionTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="3 Values Need Attention" android:textColor="#E09000" android:textSize="15sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Review the highlighted results below" android:textColor="#6B8883" android:textSize="12sp" android:fontFamily="@font/dm_sans_regular" android:layout_marginTop="3dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Results at a glance -->
+                <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="12dp" app:cardCornerRadius="16dp" app:cardElevation="2dp" app:cardBackgroundColor="#FFFFFF">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="16dp" android:paddingBottom="8dp">
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="YOUR RESULTS AT A GLANCE" android:textColor="#4A7A71" android:textSize="10sp" android:textStyle="bold" android:letterSpacing="0.1" android:fontFamily="@font/dm_sans_bold" android:layout_marginBottom="10dp"/>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingTop="10dp" android:paddingBottom="10dp">
+                            <TextView android:id="@+id/tvP1Name" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Hemoglobin" android:textColor="#1A5F72" android:textSize="13sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <TextView android:id="@+id/tvP1Val" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="14.2 g/dL" android:textColor="#1C2B2A" android:textSize="13sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold" android:layout_marginEnd="10dp"/>
+                            <TextView android:id="@+id/tvP1Flag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="NORMAL" android:textColor="#27A882" android:textSize="11sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                        </LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0"/>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingTop="10dp" android:paddingBottom="10dp" android:background="#FFFBF0">
+                            <TextView android:id="@+id/tvP2Name" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Blood Sugar" android:textColor="#1A5F72" android:textSize="13sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <TextView android:id="@+id/tvP2Val" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="126 mg/dL" android:textColor="#1C2B2A" android:textSize="13sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold" android:layout_marginEnd="10dp"/>
+                            <TextView android:id="@+id/tvP2Flag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="HIGH" android:textColor="#E05252" android:textSize="11sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                        </LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0"/>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingTop="10dp" android:paddingBottom="10dp">
+                            <TextView android:id="@+id/tvP3Name" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="White Blood Cells" android:textColor="#1A5F72" android:textSize="13sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <TextView android:id="@+id/tvP3Val" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="7.2 K/µL" android:textColor="#1C2B2A" android:textSize="13sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold" android:layout_marginEnd="10dp"/>
+                            <TextView android:id="@+id/tvP3Flag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="NORMAL" android:textColor="#27A882" android:textSize="11sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                        </LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0"/>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingTop="10dp" android:paddingBottom="10dp" android:background="#FFFBF0">
+                            <TextView android:id="@+id/tvP4Name" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Cholesterol" android:textColor="#1A5F72" android:textSize="13sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <TextView android:id="@+id/tvP4Val" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="218 mg/dL" android:textColor="#1C2B2A" android:textSize="13sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold" android:layout_marginEnd="10dp"/>
+                            <TextView android:id="@+id/tvP4Flag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="HIGH" android:textColor="#E05252" android:textSize="11sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                        </LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0"/>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingTop="10dp" android:paddingBottom="10dp" android:background="#FFFBF0">
+                            <TextView android:id="@+id/tvP5Name" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Platelets" android:textColor="#1A5F72" android:textSize="13sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <TextView android:id="@+id/tvP5Val" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="140 K/µL" android:textColor="#1C2B2A" android:textSize="13sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold" android:layout_marginEnd="10dp"/>
+                            <TextView android:id="@+id/tvP5Flag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SLIGHTLY LOW" android:textColor="#E09000" android:textSize="11sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- AI What This Means card -->
+                <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="12dp" app:cardCornerRadius="16dp" app:cardElevation="2dp" app:cardBackgroundColor="#FFFFFF">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="10dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_ai_label" android:text="AI" android:textColor="#FFFFFF" android:textSize="10sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold" android:paddingStart="8dp" android:paddingEnd="8dp" android:paddingTop="3dp" android:paddingBottom="3dp" android:layout_marginEnd="10dp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="What This Means for You" android:textColor="#1A5F72" android:textSize="15sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                        </LinearLayout>
+
+                        <TextView android:id="@+id/tvAiExplanation" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Your blood sugar is a bit high — this can happen if your body isn't processing sugar as well as it should. Cholesterol is also slightly elevated, which means your heart may need some extra care. Try eating less oily food, walking 30 minutes daily, and visit your doctor soon." android:textColor="#1C2B2A" android:textSize="13sp" android:lineSpacingMultiplier="1.6" android:fontFamily="@font/dm_sans_regular"/>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- What to do next card -->
+                <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="16dp" app:cardCornerRadius="16dp" app:cardElevation="2dp" app:cardBackgroundColor="#FFFFFF">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="WHAT TO DO NEXT" android:textColor="#4A7A71" android:textSize="10sp" android:textStyle="bold" android:letterSpacing="0.1" android:fontFamily="@font/dm_sans_bold" android:layout_marginBottom="14dp"/>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="12dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🥗" android:textSize="18sp" android:layout_marginEnd="12dp"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Cut down on sugary and oily food" android:textColor="#1C2B2A" android:textSize="13sp" android:fontFamily="@font/dm_sans_regular"/>
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="12dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🚶" android:textSize="18sp" android:layout_marginEnd="12dp"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Walk or exercise for 30 min daily" android:textColor="#1C2B2A" android:textSize="13sp" android:fontFamily="@font/dm_sans_regular"/>
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="👨‍⚕️" android:textSize="18sp" android:layout_marginEnd="12dp"/>
+                            <TextView android:id="@+id/tvTodo3" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Visit your doctor within 1–2 weeks" android:textColor="#1C2B2A" android:textSize="13sp" android:fontFamily="@font/dm_sans_regular"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Share with Doctor button -->
+                <LinearLayout
+                    android:id="@+id/btnShare"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_btn_teal"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_share" app:tint="#FFFFFF" android:contentDescription="Share" android:layout_marginEnd="10dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SHARE WITH DOCTOR" android:textColor="#FFFFFF" android:textSize="14sp" android:textStyle="bold" android:letterSpacing="0.06" android:fontFamily="@font/dm_sans_bold"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- ═══════ DOCTOR VIEW ═══════ -->
+            <LinearLayout
+                android:id="@+id/doctorView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <!-- Patient info -->
+                <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="12dp" app:cardCornerRadius="16dp" app:cardElevation="2dp" app:cardBackgroundColor="#FFFFFF">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="16dp">
+                        <FrameLayout android:layout_width="42dp" android:layout_height="42dp" android:background="@drawable/bg_avatar_teal" android:layout_marginEnd="12dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="A" android:textColor="#FFFFFF" android:textSize="18sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                        </FrameLayout>
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                            <TextView android:id="@+id/tvPatientName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Aarav Shah, M 28" android:textColor="#1A5F72" android:textSize="14sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                            <TextView android:id="@+id/tvPatientMeta" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Shared · Mar 6, 2026 · End-to-end encrypted" android:textColor="#6B8883" android:textSize="11sp" android:fontFamily="@font/dm_sans_regular" android:layout_marginTop="3dp"/>
+                        </LinearLayout>
+                        <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/ic_lock" app:tint="#6B8883" android:contentDescription="Encrypted"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Doctor results table -->
+                <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="12dp" app:cardCornerRadius="16dp" app:cardElevation="2dp" app:cardBackgroundColor="#FFFFFF">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+
+                        <!-- Header row -->
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="@drawable/bg_table_header" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="10dp" android:paddingBottom="10dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="2" android:text="TEST" android:textColor="#4A7A71" android:textSize="10sp" android:textStyle="bold" android:letterSpacing="0.08" android:fontFamily="@font/dm_sans_bold"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.4" android:text="RESULT" android:textColor="#4A7A71" android:textSize="10sp" android:textStyle="bold" android:letterSpacing="0.08" android:fontFamily="@font/dm_sans_bold"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.3" android:text="REFERENCE" android:textColor="#4A7A71" android:textSize="10sp" android:textStyle="bold" android:letterSpacing="0.08" android:fontFamily="@font/dm_sans_bold"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="FLAG" android:textColor="#4A7A71" android:textSize="10sp" android:textStyle="bold" android:letterSpacing="0.08" android:fontFamily="@font/dm_sans_bold"/>
+                        </LinearLayout>
+
+                        <!-- Hemoglobin NORMAL -->
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="12dp" android:paddingBottom="12dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="2" android:text="Hemoglobin" android:textColor="#1C2B2A" android:textSize="12sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.4" android:text="14.2 g/dL" android:textColor="#27A882" android:textSize="12sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.3" android:text="13.5–17.5" android:textColor="#6B8883" android:textSize="11sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="NORMAL" android:textColor="#27A882" android:textSize="10sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                        </LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F4F3"/>
+
+                        <!-- Glucose HIGH -->
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:background="#FFF8F0" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="12dp" android:paddingBottom="12dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="2" android:text="Glucose (F)" android:textColor="#1C2B2A" android:textSize="12sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.4" android:text="126 mg/dL" android:textColor="#E05252" android:textSize="12sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.3" android:text="70–100" android:textColor="#6B8883" android:textSize="11sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:background="@drawable/bg_flag_hi_doc" android:gravity="center" android:paddingTop="4dp" android:paddingBottom="4dp" android:paddingStart="6dp" android:paddingEnd="6dp">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="↑" android:textColor="#E05252" android:textSize="10sp" android:textStyle="bold"/>
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="HIGH" android:textColor="#E05252" android:textSize="9sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F4F3"/>
+
+                        <!-- WBC NORMAL -->
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="12dp" android:paddingBottom="12dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="2" android:text="WBC" android:textColor="#1C2B2A" android:textSize="12sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.4" android:text="7.2 K/µL" android:textColor="#27A882" android:textSize="12sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.3" android:text="4.5–11.0" android:textColor="#6B8883" android:textSize="11sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="NORMAL" android:textColor="#27A882" android:textSize="10sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                        </LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F4F3"/>
+
+                        <!-- Cholesterol HIGH -->
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:background="#FFF8F0" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="12dp" android:paddingBottom="12dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="2" android:text="Total Cholesterol" android:textColor="#1C2B2A" android:textSize="12sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.4" android:text="218 mg/dL" android:textColor="#E05252" android:textSize="12sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.3" android:text="&lt;200" android:textColor="#6B8883" android:textSize="11sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:background="@drawable/bg_flag_hi_doc" android:gravity="center" android:paddingTop="4dp" android:paddingBottom="4dp" android:paddingStart="6dp" android:paddingEnd="6dp">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="↑" android:textColor="#E05252" android:textSize="10sp" android:textStyle="bold"/>
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="HIGH" android:textColor="#E05252" android:textSize="9sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F4F3"/>
+
+                        <!-- Platelets LOW -->
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:background="#F0F8FF" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="12dp" android:paddingBottom="12dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="2" android:text="Platelets" android:textColor="#1C2B2A" android:textSize="12sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.4" android:text="140 K/µL" android:textColor="#2196C4" android:textSize="12sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.3" android:text="150–400" android:textColor="#6B8883" android:textSize="11sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:background="@drawable/bg_flag_lo_doc" android:gravity="center" android:paddingTop="4dp" android:paddingBottom="4dp" android:paddingStart="6dp" android:paddingEnd="6dp">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="↓" android:textColor="#2196C4" android:textSize="10sp" android:textStyle="bold"/>
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="LOW" android:textColor="#2196C4" android:textSize="9sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F4F3"/>
+
+                        <!-- HbA1c PRE-DM -->
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:background="#FFF8F0" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="12dp" android:paddingBottom="12dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="2" android:text="HbA1c" android:textColor="#1C2B2A" android:textSize="12sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.4" android:text="6.2%" android:textColor="#E09000" android:textSize="12sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.3" android:text="&lt;5.7%" android:textColor="#6B8883" android:textSize="11sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:background="@drawable/bg_flag_warn_doc" android:gravity="center" android:paddingTop="4dp" android:paddingBottom="4dp" android:paddingStart="4dp" android:paddingEnd="4dp">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PRE-" android:textColor="#E09000" android:textSize="9sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DM" android:textColor="#E09000" android:textSize="9sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F4F3"/>
+
+                        <!-- LDL BORDER -->
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:background="#FFF8F0" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="12dp" android:paddingBottom="12dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="2" android:text="LDL" android:textColor="#1C2B2A" android:textSize="12sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.4" android:text="142 mg/dL" android:textColor="#E09000" android:textSize="12sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.3" android:text="&lt;130" android:textColor="#6B8883" android:textSize="11sp" android:fontFamily="@font/dm_sans_regular"/>
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:background="@drawable/bg_flag_warn_doc" android:gravity="center" android:paddingTop="4dp" android:paddingBottom="4dp" android:paddingStart="4dp" android:paddingEnd="4dp">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="↑" android:textColor="#E09000" android:textSize="10sp" android:textStyle="bold"/>
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="BORDER" android:textColor="#E09000" android:textSize="9sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Clinical Interpretation -->
+                <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="16dp" app:cardCornerRadius="16dp" app:cardElevation="2dp" app:cardBackgroundColor="#FFFFFF">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CLINICAL INTERPRETATION" android:textColor="#4A7A71" android:textSize="10sp" android:textStyle="bold" android:letterSpacing="0.1" android:fontFamily="@font/dm_sans_bold" android:layout_marginBottom="14dp"/>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="10dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Primary Concern" android:textColor="#6B8883" android:textSize="12sp" android:fontFamily="@font/dm_sans_regular" android:minWidth="120dp" android:layout_marginEnd="12dp"/>
+                            <TextView android:id="@+id/tvClinPrimary" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Impaired fasting glucose" android:textColor="#E05252" android:textSize="12sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="10dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Risk Level" android:textColor="#6B8883" android:textSize="12sp" android:fontFamily="@font/dm_sans_regular" android:minWidth="120dp" android:layout_marginEnd="12dp"/>
+                            <TextView android:id="@+id/tvClinRisk" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Moderate" android:textColor="#E09000" android:textSize="12sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Follow-up" android:textColor="#6B8883" android:textSize="12sp" android:fontFamily="@font/dm_sans_regular" android:minWidth="120dp" android:layout_marginEnd="12dp"/>
+                            <TextView android:id="@+id/tvClinFollowup" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Within 2 weeks" android:textColor="#1A5F72" android:textSize="12sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

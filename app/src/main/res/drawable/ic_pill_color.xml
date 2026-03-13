@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp"
+    android:height="20dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Top half - red -->
+    <path
+        android:pathData="M8.5,3 C5.46,3 3,5.46 3,8.5 L3,12 L21,12 L21,8.5 C21,5.46 18.54,3 15.5,3 Z"
+        android:fillColor="#E05252" />
+    <!-- Bottom half - orange -->
+    <path
+        android:pathData="M3,12 L3,15.5 C3,18.54 5.46,21 8.5,21 L15.5,21 C18.54,21 21,18.54 21,15.5 L21,12 Z"
+        android:fillColor="#F5A623" />
+    <!-- Center dividing line (line x1=3 y1=12 x2=21 y2=12) -->
+    <path
+        android:pathData="M3,12 L21,12"
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5" />
+</vector>
