@@ -3,6 +3,7 @@ package com.aariz.mediscan
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.aariz.mediscan.databinding.ActivityMainBinding
@@ -28,13 +29,23 @@ class MainActivity : AppCompatActivity() {
         navAnalysis = binding.navAnalysis
         navProfile  = binding.navProfile
 
+        // ── Edge-to-edge + inset handling ────────────────────────────────
+        // Automatically adapts for gesture navigation (swipe pill) AND
+        // 3-button navigation — no hardcoded dp values needed.
+        WindowInsetHelper.apply(
+            activity          = this,
+            floatingNavCard   = binding.bnav,              // CardView in CoordinatorLayout
+            fragmentContainer = binding.fragmentContainer,
+            baseNavMarginDp   = 14                         // matches layout_marginBottom in XML
+        )
+        // ─────────────────────────────────────────────────────────────────
+
         if (savedInstanceState == null) {
             loadFragment(HomeFragment(), "home", addToBack = false)
             setActiveNav(navHome)
         }
 
         navHome.setOnClickListener {
-            // Clear entire back stack back to home
             supportFragmentManager.popBackStack(null,
                 androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
             loadFragment(HomeFragment(), "home", addToBack = false)
@@ -55,9 +66,26 @@ class MainActivity : AppCompatActivity() {
             loadFragment(ProfileFragment(), "profile", addToBack = true)
             setActiveNav(navProfile)
         }
+
+        // ── Back press — replaces deprecated onBackPressed() ────────────
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (supportFragmentManager.backStackEntryCount > 0) {
+                    supportFragmentManager.popBackStack()
+                    // Sync nav highlight back to Home when stack becomes empty
+                    if (supportFragmentManager.backStackEntryCount == 1) {
+                        setActiveNav(navHome)
+                    }
+                } else {
+                    // No back stack — let the system handle it (exit app)
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                }
+            }
+        })
     }
 
-    // ── Called by child fragments to navigate within the container ──
+    // ── Called by child fragments to navigate within the container ──────
     fun navigateTo(fragment: Fragment, tag: String) {
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
@@ -73,18 +101,6 @@ class MainActivity : AppCompatActivity() {
 
         if (addToBack) tx.addToBackStack(tag)
         tx.commit()
-    }
-
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount > 0) {
-            supportFragmentManager.popBackStack()
-            // Sync nav highlight back to home when stack is empty
-            if (supportFragmentManager.backStackEntryCount == 1) {
-                setActiveNav(navHome)
-            }
-        } else {
-            super.onBackPressed()
-        }
     }
 
     fun setActiveNav(activeNav: LinearLayout) {

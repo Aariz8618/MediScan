@@ -27,7 +27,7 @@ class UploadFragment : Fragment() {
     }
 
     override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?) =
-        i.inflate(R.layout.fragment_upload, c, false)
+        i.inflate(R.layout.activity_upload, c, false)
 
     override fun onViewCreated(v: View, s: Bundle?) {
         super.onViewCreated(v, s)

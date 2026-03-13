@@ -87,5 +87,52 @@
     <color name="c_amber">#E09000</color>
     <color name="c_ok">#27A882</color>
 
+    <!-- ── Home Screen Hero ──────────────────────────── -->
+    <color name="home_hero_bg">#2C7A96</color>          <!-- flat medium teal -->
+    <color name="home_stat_card_bg">#225F77</color>     <!-- slightly darker teal cards -->
+    <color name="home_stat_label">#8EC8DB</color>       <!-- light blue-white label -->
+    <color name="home_notification_bg">#246E8A</color>  <!-- rounded square bell button -->
+
+    <!-- ── Home Screen Page bg ───────────────────────── -->
+    <color name="home_page_bg">#EEF7F9</color>
+
+    <!-- ── Home AI Strip ─────────────────────────────── -->
+    <color name="home_ai_strip_bg">#236B5C</color>      <!-- solid dark teal-green -->
+    <color name="home_ai_orb_bg">#33FFFFFF</color>
+
+    <!-- ── Home Stat: Flagged ────────────────────────── -->
+    <color name="home_stat_flagged">#F0A500</color>
+
+    <!-- ── Home Chip Active ──────────────────────────── -->
+    <color name="home_chip_active_bg">#236B5C</color>
+
+    <!-- ── Home Badges ───────────────────────────────── -->
+    <color name="home_badge_warn_bg">#FFF3CD</color>
+    <color name="home_badge_ok_bg">#E0F7EF</color>
+
+
+    <!-- ── Reports Screen ────────────────────────────── -->
+    <color name="reports_title">#1A5F72</color>          <!-- "My Reports" teal -->
+    <color name="reports_subtitle">#4A7A71</color>       <!-- "24 reports · 3 need review" -->
+    <color name="reports_tab_active">#1A8C6E</color>     <!-- active tab text + underline -->
+    <color name="reports_tab_inactive">#6B8883</color>   <!-- inactive tab text -->
+    <color name="reports_search_bg">#E8F5F3</color>      <!-- search bar fill -->
+    <color name="reports_page_bg">#EEF7F9</color>        <!-- page background -->
+
+    <!-- ── Report Card ───────────────────────────────── -->
+    <color name="card_title">#1A5F72</color>             <!-- report name teal -->
+    <color name="card_date">#6B8883</color>              <!-- date/hospital muted -->
+    <color name="card_metric_teal">#1A5F72</color>       <!-- metric val 1 & 3 -->
+    <color name="card_metric_red">#E05252</color>        <!-- flags / high values -->
+    <color name="card_metric_green">#1A8C6E</color>      <!-- normal / sinus -->
+    <color name="card_metric_label">#6B8883</color>      <!-- metric label below -->
+    <color name="card_divider">#DCEAE7</color>           <!-- hairline divider -->
+
+    <!-- ── Report Badges ─────────────────────────────── -->
+    <color name="bdg_amber_bg">#FFF3CD</color>
+    <color name="bdg_amber_txt">#E09000</color>          <!-- Review / Note -->
+    <color name="bdg_green_bg">#E0F7EF</color>
+    <color name="bdg_green_border">#B2EAD8</color>
+    <color name="bdg_green_txt">#27A882</color>          <!-- Normal / Clear -->
 
 </resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Soft radial cyan glow — fixed absolute radius, works API 21+ -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <gradient
+        android:type="radial"
+        android:gradientRadius="200dp"
+        android:startColor="#2200D4C8"
+        android:endColor="#0000D4C8"/>
+</shape>

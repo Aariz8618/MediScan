@@ -5,18 +5,21 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="12dp"
     android:clickable="true"
     android:focusable="true"
-    app:cardBackgroundColor="#FFF"
-    app:cardCornerRadius="16dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardCornerRadius="18dp"
     app:cardElevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="14dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
 
         <!-- TOP ROW: icon | title + date | badge -->
         <LinearLayout
@@ -25,12 +28,13 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
+            <!-- Icon -->
             <FrameLayout
                 android:id="@+id/iconWrap"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:layout_marginEnd="12dp"
-                android:background="@drawable/ic_lab_bg">
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_marginEnd="13dp"
+                android:background="@drawable/bg_report_icon_o">
 
                 <TextView
                     android:id="@+id/tvIcon"
@@ -38,9 +42,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="🧪"
-                    android:textSize="19sp" />
+                    android:textSize="20sp" />
             </FrameLayout>
 
+            <!-- Title + date -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -54,36 +59,40 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="Complete Blood Count (CBC)"
-                    android:textColor="#1C2B2A"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
+                    android:textColor="#1A5F72"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/dm_sans_bold" />
 
                 <TextView
                     android:id="@+id/tvDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="3dp"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="Today · 9:30 AM · City Hospital"
                     android:textColor="#6B8883"
-                    android:textSize="11sp" />
+                    android:textSize="11sp"
+                    android:fontFamily="@font/dm_sans_regular" />
             </LinearLayout>
 
+            <!-- Badge -->
             <TextView
                 android:id="@+id/tvBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/bg_bdg_amber"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
+                android:paddingStart="11dp"
+                android:paddingEnd="11dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:text="Review"
                 android:textColor="#E09000"
-                android:textSize="10sp"
-                android:textStyle="bold" />
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/dm_sans_bold" />
 
         </LinearLayout>
 
@@ -91,8 +100,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginBottom="11dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="13dp"
             android:background="#DCEAE7" />
 
         <!-- METRICS ROW: 3 equal columns -->
@@ -101,6 +110,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <!-- Metric 1 -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -112,20 +122,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="14 values"
-                    android:textColor="#1C2B2A"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:textColor="#1A5F72"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/dm_sans_bold" />
 
                 <TextView
                     android:id="@+id/tvM1Lbl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
+                    android:layout_marginTop="2dp"
                     android:text="Analyzed"
                     android:textColor="#6B8883"
-                    android:textSize="10sp" />
+                    android:textSize="10sp"
+                    android:fontFamily="@font/dm_sans_regular" />
             </LinearLayout>
 
+            <!-- Metric 2 — flagged/red by default, set dynamically -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -138,19 +151,22 @@
                     android:layout_height="wrap_content"
                     android:text="3 High"
                     android:textColor="#E05252"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/dm_sans_bold" />
 
                 <TextView
                     android:id="@+id/tvM2Lbl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
+                    android:layout_marginTop="2dp"
                     android:text="Flags"
                     android:textColor="#6B8883"
-                    android:textSize="10sp" />
+                    android:textSize="10sp"
+                    android:fontFamily="@font/dm_sans_regular" />
             </LinearLayout>
 
+            <!-- Metric 3 -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -162,18 +178,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="98%"
-                    android:textColor="#1C2B2A"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:textColor="#1A5F72"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/dm_sans_bold" />
 
                 <TextView
                     android:id="@+id/tvM3Lbl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
+                    android:layout_marginTop="2dp"
                     android:text="Confidence"
                     android:textColor="#6B8883"
-                    android:textSize="10sp" />
+                    android:textSize="10sp"
+                    android:fontFamily="@font/dm_sans_regular" />
             </LinearLayout>
 
         </LinearLayout>

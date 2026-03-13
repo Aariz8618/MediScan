@@ -17,4 +17,19 @@
         <item name="colorOnPrimary">#FFFFFF</item>
     </style>
 
+    <!-- Splash screen theme — applied only to SplashActivity -->
+    <style name="Theme.MediScan.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Dark charcoal instantly on cold start — zero white flash -->
+        <item name="android:windowBackground">#1A1E24</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">#1A1E24</item>
+        <item name="android:navigationBarColor">#1A1E24</item>
+        <!-- false = white icons on dark background -->
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimary">#00D4C8</item>
+    </style>
+
 </resources>

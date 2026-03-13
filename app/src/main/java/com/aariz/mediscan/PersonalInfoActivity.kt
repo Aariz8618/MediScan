@@ -1,4 +1,4 @@
-package com.aariz.mediscan
+package com.aariz.mediscan;
 
 import android.os.Bundle
 import android.widget.ArrayAdapter

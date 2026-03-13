@@ -12,20 +12,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MediScan">
 
-        <!-- ✅ LoginActivity is now the LAUNCHER -->
+        <!-- ✅ SplashActivity is the LAUNCHER -->
         <activity
-            android:name=".LoginActivity"
-            android:exported="true">
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MediScan.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- MainActivity is a regular activity (no intent-filter) -->
+        <!-- LoginActivity — launched from SplashActivity -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+
+        <!-- MainActivity — launched after login -->
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
+        <activity android:name=".PersonalInfoActivity"
+            android:exported="false"/>
 
         <meta-data
             android:name="preloaded_fonts"

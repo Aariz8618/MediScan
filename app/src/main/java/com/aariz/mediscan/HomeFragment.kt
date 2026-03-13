@@ -106,9 +106,7 @@ class HomeFragment : Fragment() {
 
         // Upload card → go to Upload screen
         binding.cardUpload.setOnClickListener {
-            // TODO: replace with real navigation
-            // e.g. (activity as MainActivity).navigateTo(UploadFragment())
-            Toast.makeText(requireContext(), "Opening upload…", Toast.LENGTH_SHORT).show()
+            (activity as? MainActivity)?.navigateTo(UploadFragment(), "upload")
         }
 
         // AI Insight strip → open latest report detail
