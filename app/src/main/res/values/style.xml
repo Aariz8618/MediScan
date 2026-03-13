@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:windowBackground">@color/bg_page</item>
+        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:navigationBarColor">@color/bg_card</item>
+    </style>
+    <!--  ── Toolbar ──  -->
+    <style name="AppToolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@color/primary</item>
+        <item name="titleTextColor">@color/text_on_primary</item>
+        <item name="subtitleTextColor">#B2FFFFFF</item>
+        <item name="navigationIconTint">@color/text_on_primary</item>
+    </style>
+    <!--  ── Cards ──  -->
+    <style name="AppCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/bg_card</item>
+        <item name="cardCornerRadius">8dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="strokeColor">@color/divider</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+    <style name="AppCard.Surface" parent="AppCard">
+        <item name="cardBackgroundColor">@color/bg_surface</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+    <!--  ── Buttons ──  -->
+    <style name="AppButton.Primary" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/accent</item>
+        <item name="android:textColor">@color/text_on_accent</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+    <style name="AppButton.Outline" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/primary_light</item>
+        <item name="android:textColor">@color/primary_light</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+    <!--  ── Chips ──  -->
+    <style name="QuickAccessChip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/bg_card</item>
+        <item name="chipStrokeColor">@color/divider</item>
+        <item name="chipStrokeWidth">1.5dp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="chipCornerRadius">8dp</item>
+    </style>
+    <!--  ── Text ──  -->
+    <style name="SectionLabel">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/text_hint</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+    <style name="TextPrimary">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextSecondary">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+    <style name="TextHint">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/text_hint</item>
+    </style>
+    <!--  ── Badge Pills ──  -->
+    <style name="Badge.Ok">
+        <item name="android:background">@drawable/bg_badge_ok</item>
+        <item name="android:textColor">@color/status_ok</item>
+        <item name="android:textSize">9sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+    </style>
+    <style name="Badge.Warn">
+        <item name="android:background">@drawable/bg_badge_warn</item>
+        <item name="android:textColor">@color/status_warn</item>
+        <item name="android:textSize">9sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+    </style>
+    <style name="Badge.Danger">
+        <item name="android:background">@drawable/bg_badge_danger</item>
+        <item name="android:textColor">@color/status_danger</item>
+        <item name="android:textSize">9sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+    </style>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- bg_scan_badge_danger.xml — scan overlay result badge: danger -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#CCCC3333"/>
+    <corners android:radius="6dp"/>
+</shape>
