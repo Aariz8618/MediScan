@@ -10,8 +10,6 @@ object RetrofitClient {
     // Change this to your PC's local IP when testing on a real device
     // Use 10.0.2.2 for Android Emulator (maps to localhost)
     // Use your PC IP like 192.168.1.x for a real phone on same WiFi
-    private const val BASE_URL = "http://10.0.2.2:8000/"
-
     private val okHttpClient = OkHttpClient.Builder()
         .connectTimeout(60, TimeUnit.SECONDS)
         .readTimeout(120, TimeUnit.SECONDS)   // Claude API can take time
@@ -20,7 +18,7 @@ object RetrofitClient {
 
     val api: MediScanApi by lazy {
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.API_BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
