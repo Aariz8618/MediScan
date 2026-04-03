@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_page">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/hdr"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:elevation="4dp">
+
+        <FrameLayout
+            android:id="@+id/btnBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/bg_back_btn"
+            android:layout_marginEnd="10dp">
+            <ImageView android:layout_width="14dp" android:layout_height="14dp" android:layout_gravity="center" android:src="@drawable/ic_chevron_left" app:tint="@color/white" tools:ignore="ContentDescription" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Upload Report"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:paddingBottom="16dp">
+
+            <LinearLayout
+                android:id="@+id/dropZone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_drop_zone"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="32dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📄" android:textSize="40sp" android:layout_marginBottom="10dp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Drop your file here" android:textColor="@color/hdr" android:textSize="15sp" android:textStyle="bold" android:layout_marginBottom="4dp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PDF, JPG, PNG · Max 20 MB" android:textColor="@color/muted" android:textSize="12sp" android:layout_marginBottom="16dp" />
+
+                <Button
+                    android:id="@+id/btnBrowse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="Browse Files"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_share_btn"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Report Type"
+                android:textColor="@color/muted"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.06"
+                android:layout_marginBottom="10dp" />
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:rowCount="4"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout android:id="@+id/typeLab" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:background="@drawable/bg_type_card_active" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:layout_margin="4dp" android:minHeight="72dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🧪" android:textSize="22sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lab Report" android:textColor="@color/white" android:textSize="12sp" android:textStyle="bold" android:layout_marginTop="4dp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CBC, LFT, RFT" android:textColor="#B2FFFFFF" android:textSize="10sp" android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/typeEcg" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:background="@drawable/bg_type_card" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:layout_margin="4dp" android:minHeight="72dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💓" android:textSize="22sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ECG Strip" android:textColor="@color/hdr" android:textSize="12sp" android:textStyle="bold" android:layout_marginTop="4dp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="12-lead ECG" android:textColor="@color/muted" android:textSize="10sp" android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/typeMri" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:background="@drawable/bg_type_card" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:layout_margin="4dp" android:minHeight="72dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🧠" android:textSize="22sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MRI Scan" android:textColor="@color/hdr" android:textSize="12sp" android:textStyle="bold" android:layout_marginTop="4dp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Brain, Spine" android:textColor="@color/muted" android:textSize="10sp" android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/typeXray" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:background="@drawable/bg_type_card" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:layout_margin="4dp" android:minHeight="72dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🫁" android:textSize="22sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="X-Ray" android:textColor="@color/hdr" android:textSize="12sp" android:textStyle="bold" android:layout_marginTop="4dp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Chest, Bone" android:textColor="@color/muted" android:textSize="10sp" android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/typeCt" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:background="@drawable/bg_type_card" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:layout_margin="4dp" android:minHeight="72dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔬" android:textSize="22sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CT Scan" android:textColor="@color/hdr" android:textSize="12sp" android:textStyle="bold" android:layout_marginTop="4dp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lung, Abdomen" android:textColor="@color/muted" android:textSize="10sp" android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/typeRetinal" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:background="@drawable/bg_type_card" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:layout_margin="4dp" android:minHeight="72dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="👁️" android:textSize="22sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Retinal" android:textColor="@color/hdr" android:textSize="12sp" android:textStyle="bold" android:layout_marginTop="4dp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fundus image" android:textColor="@color/muted" android:textSize="10sp" android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/typeRx" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:background="@drawable/bg_type_card" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:layout_margin="4dp" android:minHeight="72dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💊" android:textSize="22sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Prescription" android:textColor="@color/hdr" android:textSize="12sp" android:textStyle="bold" android:layout_marginTop="4dp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rx, Medication" android:textColor="@color/muted" android:textSize="10sp" android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/typeOther" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:background="@drawable/bg_type_card" android:orientation="vertical" android:gravity="center" android:padding="12dp" android:layout_margin="4dp" android:minHeight="72dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📋" android:textSize="22sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Other" android:textColor="@color/hdr" android:textSize="12sp" android:textStyle="bold" android:layout_marginTop="4dp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Any medical doc" android:textColor="@color/muted" android:textSize="10sp" android:layout_marginTop="2dp" />
+                </LinearLayout>
+            </GridLayout>
+
+            <Button
+                android:id="@+id/btnAnalyze"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="52dp"
+                android:text="Analyze with AI →"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_share_btn" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

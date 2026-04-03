@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#EEF7F9">
 
-    <!-- ═══════════ HEADER — white, teal title ═══════════ -->
+    <!-- HEADER -->
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="AI v3.2 · Please wait"
+                android:text="MedScan AI · Please wait"
                 android:textColor="#6B8883"
                 android:textSize="12sp"
                 android:fontFamily="@font/dm_sans_regular"
@@ -65,7 +65,7 @@
 
     </LinearLayout>
 
-    <!-- ═══════════ BODY ═══════════ -->
+    <!-- BODY -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -83,7 +83,7 @@
             android:paddingTop="20dp"
             android:paddingBottom="24dp">
 
-            <!-- ── Main analysis card ── -->
+            <!-- Main analysis card -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
                     android:paddingTop="32dp"
                     android:paddingBottom="32dp">
 
-                    <!-- Spinner circle -->
+                    <!-- Spinner -->
                     <ProgressBar
                         android:id="@+id/progressSpinner"
                         android:layout_width="72dp"
@@ -111,7 +111,6 @@
                         android:indeterminateTint="#1A8C6E"
                         android:layout_marginBottom="24dp" />
 
-                    <!-- AI analyzing text -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -123,198 +122,66 @@
                         android:gravity="center"
                         android:layout_marginBottom="6dp" />
 
+                    <!-- ★ THIS IS THE KEY CHANGE — tvProcessingStatus ★ -->
                     <TextView
+                        android:id="@+id/tvProcessingStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="This usually takes 10–20 seconds"
+                        android:text="Uploading file..."
                         android:textColor="#6B8883"
                         android:textSize="12sp"
                         android:fontFamily="@font/dm_sans_regular"
                         android:gravity="center"
                         android:layout_marginBottom="28dp" />
 
-                    <!-- Step 1 — done -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="16dp">
-
-                        <FrameLayout
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:background="@drawable/bg_step_done"
-                            android:layout_marginEnd="14dp">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="✓"
-                                android:textColor="#1A8C6E"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
+                    <!-- Step 1 -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="16dp">
+                        <FrameLayout android:layout_width="28dp" android:layout_height="28dp" android:background="@drawable/bg_step_done" android:layout_marginEnd="14dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="✓" android:textColor="#1A8C6E" android:textSize="13sp" android:textStyle="bold" />
                         </FrameLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="File uploaded &amp; validated"
-                            android:textColor="#1A5F72"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/dm_sans_bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="File uploaded &amp; validated" android:textColor="#1A5F72" android:textSize="14sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold" />
                     </LinearLayout>
 
-                    <!-- Step 2 — done -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="16dp">
-
-                        <FrameLayout
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:background="@drawable/bg_step_done"
-                            android:layout_marginEnd="14dp">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="✓"
-                                android:textColor="#1A8C6E"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
+                    <!-- Step 2 -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="16dp">
+                        <FrameLayout android:layout_width="28dp" android:layout_height="28dp" android:background="@drawable/bg_step_done" android:layout_marginEnd="14dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="✓" android:textColor="#1A8C6E" android:textSize="13sp" android:textStyle="bold" />
                         </FrameLayout>
-
-                        <TextView
-                            android:id="@+id/tvStep2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Document type — Lab Report"
-                            android:textColor="#1A5F72"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/dm_sans_bold" />
+                        <TextView android:id="@+id/tvStep2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Document type detected" android:textColor="#1A5F72" android:textSize="14sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold" />
                     </LinearLayout>
 
-                    <!-- Step 3 — done -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="16dp">
-
-                        <FrameLayout
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:background="@drawable/bg_step_done"
-                            android:layout_marginEnd="14dp">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="✓"
-                                android:textColor="#1A8C6E"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
+                    <!-- Step 3 -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="16dp">
+                        <FrameLayout android:layout_width="28dp" android:layout_height="28dp" android:background="@drawable/bg_step_done" android:layout_marginEnd="14dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="✓" android:textColor="#1A8C6E" android:textSize="13sp" android:textStyle="bold" />
                         </FrameLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="OCR text extraction complete"
-                            android:textColor="#1A5F72"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/dm_sans_bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sending to AI server" android:textColor="#1A5F72" android:textSize="14sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold" />
                     </LinearLayout>
 
-                    <!-- Step 4 — active (AI badge) -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="16dp">
-
-                        <FrameLayout
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:background="@drawable/bg_step_active"
-                            android:layout_marginEnd="14dp">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="AI"
-                                android:textColor="#FFFFFF"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
+                    <!-- Step 4 — AI active -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="16dp">
+                        <FrameLayout android:layout_width="28dp" android:layout_height="28dp" android:background="@drawable/bg_step_active" android:layout_marginEnd="14dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="AI" android:textColor="#FFFFFF" android:textSize="10sp" android:textStyle="bold" />
                         </FrameLayout>
-
-                        <TextView
-                            android:id="@+id/tvStep4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Running AI medical analysis…"
-                            android:textColor="#1C2B2A"
-                            android:textSize="14sp"
-                            android:fontFamily="@font/dm_sans_regular" />
+                        <TextView android:id="@+id/tvStep4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Running AI medical analysis…" android:textColor="#1C2B2A" android:textSize="14sp" android:fontFamily="@font/dm_sans_regular" />
                     </LinearLayout>
 
                     <!-- Step 5 — pending -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="16dp">
-
-                        <FrameLayout
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:background="@drawable/bg_step_pending"
-                            android:layout_marginEnd="14dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Generating clinical insights"
-                            android:textColor="#6B8883"
-                            android:textSize="14sp"
-                            android:fontFamily="@font/dm_sans_regular" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="16dp">
+                        <FrameLayout android:layout_width="28dp" android:layout_height="28dp" android:background="@drawable/bg_step_pending" android:layout_marginEnd="14dp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Generating clinical insights" android:textColor="#6B8883" android:textSize="14sp" android:fontFamily="@font/dm_sans_regular" />
                     </LinearLayout>
 
                     <!-- Step 6 — pending -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <FrameLayout
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:background="@drawable/bg_step_pending"
-                            android:layout_marginEnd="14dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Preparing visual report"
-                            android:textColor="#6B8883"
-                            android:textSize="14sp"
-                            android:fontFamily="@font/dm_sans_regular" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
+                        <FrameLayout android:layout_width="28dp" android:layout_height="28dp" android:background="@drawable/bg_step_pending" android:layout_marginEnd="14dp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Preparing visual report" android:textColor="#6B8883" android:textSize="14sp" android:fontFamily="@font/dm_sans_regular" />
                     </LinearLayout>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- ── Privacy Guaranteed card ── -->
+            <!-- Privacy card -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -322,72 +189,27 @@
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
                 app:cardBackgroundColor="#FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingStart="18dp"
-                    android:paddingEnd="18dp"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="16dp">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_lock"
-                        app:tint="#1A8C6E"
-                        android:layout_marginEnd="12dp"
-                        android:contentDescription="Privacy" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Privacy Guaranteed"
-                            android:textColor="#1A5F72"
-                            android:textSize="13sp"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/dm_sans_bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Your data is encrypted end-to-end and never shared with third parties."
-                            android:textColor="#6B8883"
-                            android:textSize="11sp"
-                            android:fontFamily="@font/dm_sans_regular"
-                            android:lineSpacingMultiplier="1.4"
-                            android:layout_marginTop="3dp" />
-
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingStart="18dp" android:paddingEnd="18dp" android:paddingTop="16dp" android:paddingBottom="16dp">
+                    <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/ic_lock" app:tint="#1A8C6E" android:layout_marginEnd="12dp" android:contentDescription="Privacy" />
+                    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Privacy Guaranteed" android:textColor="#1A5F72" android:textSize="13sp" android:textStyle="bold" android:fontFamily="@font/dm_sans_bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Your data is encrypted end-to-end and never shared with third parties." android:textColor="#6B8883" android:textSize="11sp" android:fontFamily="@font/dm_sans_regular" android:lineSpacingMultiplier="1.4" android:layout_marginTop="3dp" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- ── View Results button — dark navy ── -->
-            <LinearLayout
+            <!-- View Results button -->
+            <Button
                 android:id="@+id/btnViewResults"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@drawable/bg_btn_navy"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:clickable="true"
-                android:focusable="true">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View Results →"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/dm_sans_bold" />
-            </LinearLayout>
+                android:text="View Results →"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/dm_sans_bold"
+                android:visibility="gone" />
 
         </LinearLayout>
     </ScrollView>

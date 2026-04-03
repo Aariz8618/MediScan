@@ -1,104 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
+
+    <!--
+        Base app theme — used by all activities except Splash.
+        Name matches AndroidManifest: android:theme="@style/Theme.MediScan"
+    -->
+    <style name="Theme.MediScan" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Brand colors -->
+        <item name="colorPrimary">@color/hdr</item>
+        <item name="colorPrimaryVariant">@color/sub</item>
+        <item name="colorOnPrimary">@color/white</item>
         <item name="colorAccent">@color/accent</item>
+
+        <!-- UI Colors -->
         <item name="android:windowBackground">@color/bg_page</item>
-        <item name="android:statusBarColor">@color/primary</item>
+        <item name="colorSurface">@color/bg_card</item>
+
+        <!-- Status & Nav Bar -->
+        <item name="android:statusBarColor">@color/hdr</item>
+        <item name="android:windowLightStatusBar">false</item>
         <item name="android:navigationBarColor">@color/bg_card</item>
+
+        <!-- Window features -->
+        <item name="android:windowNoTitle">true</item>
     </style>
-    <!--  ── Toolbar ──  -->
+
+    <!-- Splash theme — no action bar, solid hdr background while window loads -->
+    <style name="Theme.MediScan.Splash" parent="Theme.MediScan">
+        <item name="android:windowBackground">@color/hdr</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Legacy alias kept for any layouts still using AppTheme -->
+    <style name="AppTheme" parent="Theme.MediScan" />
+
+    <!-- ── Toolbar ── -->
     <style name="AppToolbar" parent="Widget.MaterialComponents.Toolbar">
-        <item name="android:background">@color/primary</item>
-        <item name="titleTextColor">@color/text_on_primary</item>
-        <item name="subtitleTextColor">#B2FFFFFF</item>
-        <item name="navigationIconTint">@color/text_on_primary</item>
+        <item name="android:background">@color/hdr</item>
+        <item name="titleTextColor">@color/white</item>
+        <item name="subtitleTextColor">@color/text_on_dark_faint</item>
+        <item name="navigationIconTint">@color/white</item>
     </style>
-    <!--  ── Cards ──  -->
+
+    <!-- ── Cards ── -->
     <style name="AppCard" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">@color/bg_card</item>
-        <item name="cardCornerRadius">8dp</item>
+        <item name="cardCornerRadius">10dp</item>
         <item name="cardElevation">2dp</item>
-        <item name="strokeColor">@color/divider</item>
+        <item name="strokeColor">@color/g2</item>
         <item name="strokeWidth">1dp</item>
     </style>
+
+    <!-- Surface variant: subtle tinted bg, no elevation -->
     <style name="AppCard.Surface" parent="AppCard">
-        <item name="cardBackgroundColor">@color/bg_surface</item>
+        <item name="cardBackgroundColor">@color/g1</item>
         <item name="cardElevation">0dp</item>
     </style>
-    <!--  ── Buttons ──  -->
+
+    <!-- ── Buttons ── -->
     <style name="AppButton.Primary" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/accent</item>
-        <item name="android:textColor">@color/text_on_accent</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textAllCaps">true</item>
-        <item name="cornerRadius">8dp</item>
-        <item name="android:letterSpacing">0.05</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="android:letterSpacing">0.03</item>
     </style>
+
     <style name="AppButton.Outline" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="strokeColor">@color/primary_light</item>
-        <item name="android:textColor">@color/primary_light</item>
-        <item name="cornerRadius">8dp</item>
+        <item name="strokeColor">@color/hdr</item>
+        <item name="android:textColor">@color/hdr</item>
+        <item name="cornerRadius">10dp</item>
         <item name="android:textAllCaps">true</item>
     </style>
-    <!--  ── Chips ──  -->
+
+    <!-- ── Chips ── -->
     <style name="QuickAccessChip" parent="Widget.MaterialComponents.Chip.Filter">
         <item name="chipBackgroundColor">@color/bg_card</item>
-        <item name="chipStrokeColor">@color/divider</item>
+        <item name="chipStrokeColor">@color/g2</item>
         <item name="chipStrokeWidth">1.5dp</item>
-        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textColor">@color/sub</item>
         <item name="chipCornerRadius">8dp</item>
     </style>
-    <!--  ── Text ──  -->
+
+    <!-- ── Text styles ── -->
     <style name="SectionLabel">
         <item name="android:textSize">10sp</item>
-        <item name="android:textColor">@color/text_hint</item>
+        <item name="android:textColor">@color/muted</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:letterSpacing">0.1</item>
+        <item name="android:letterSpacing">0.08</item>
         <item name="android:textAllCaps">true</item>
     </style>
+
     <style name="TextPrimary">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColor">@color/txt</item>
         <item name="android:textStyle">bold</item>
     </style>
+
     <style name="TextSecondary">
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textColor">@color/sub</item>
     </style>
+
     <style name="TextHint">
         <item name="android:textSize">11sp</item>
-        <item name="android:textColor">@color/text_hint</item>
+        <item name="android:textColor">@color/muted</item>
     </style>
-    <!--  ── Badge Pills ──  -->
+
+    <!-- ── Badge Pills ── -->
+    <style name="Badge">
+        <item name="android:textSize">9sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+    </style>
+
     <style name="Badge.Ok">
         <item name="android:background">@drawable/bg_badge_ok</item>
         <item name="android:textColor">@color/status_ok</item>
-        <item name="android:textSize">9sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:paddingStart">8dp</item>
-        <item name="android:paddingEnd">8dp</item>
-        <item name="android:paddingTop">3dp</item>
-        <item name="android:paddingBottom">3dp</item>
     </style>
+
     <style name="Badge.Warn">
         <item name="android:background">@drawable/bg_badge_warn</item>
         <item name="android:textColor">@color/status_warn</item>
-        <item name="android:textSize">9sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:paddingStart">8dp</item>
-        <item name="android:paddingEnd">8dp</item>
-        <item name="android:paddingTop">3dp</item>
-        <item name="android:paddingBottom">3dp</item>
     </style>
+
     <style name="Badge.Danger">
         <item name="android:background">@drawable/bg_badge_danger</item>
         <item name="android:textColor">@color/status_danger</item>
-        <item name="android:textSize">9sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:paddingStart">8dp</item>
-        <item name="android:paddingEnd">8dp</item>
-        <item name="android:paddingTop">3dp</item>
-        <item name="android:paddingBottom">3dp</item>
     </style>
+
 </resources>

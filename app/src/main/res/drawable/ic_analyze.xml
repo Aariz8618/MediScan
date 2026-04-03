@@ -5,21 +5,12 @@
     android:viewportWidth="24"
     android:viewportHeight="24">
     <path
-        android:fillColor="@android:color/transparent"
-        android:strokeColor="#78909C"
-        android:strokeWidth="1.8"
+        android:pathData="M21,21l-4.35,-4.35"
+        android:strokeColor="#05668D"
         android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:pathData="M21,21 L15.5,15.5"/>
-    <circle
-        android:fillColor="@android:color/transparent"
-        android:strokeColor="#78909C"
-        android:strokeWidth="1.8"
-        android:centerX="10" android:centerY="10" android:radius="7"/>
+        android:strokeWidth="2" />
     <path
-        android:fillColor="@android:color/transparent"
-        android:strokeColor="#78909C"
-        android:strokeWidth="1.8"
-        android:strokeLineCap="round"
-        android:pathData="M7,10 L9,12 L13,8"/>
+        android:pathData="M11,11m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0"
+        android:strokeColor="#05668D"
+        android:strokeWidth="2" />
 </vector>

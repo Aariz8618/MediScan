@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_page"
+    android:orientation="vertical">
+
+
+    <!-- ── ANALYSIS HEADER (dark) ── -->
+    <!-- paddingTop is overridden in Activity via ViewCompat.setOnApplyWindowInsetsListener -->
+    <LinearLayout
+        android:id="@+id/analysisHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/hdr"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="13dp"
+        android:paddingBottom="15dp"
+        android:elevation="4dp">
+
+        <!-- Back row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginBottom="11dp">
+
+            <!-- Back button -->
+            <FrameLayout
+                android:id="@+id/btnBack"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/bg_back_btn"
+                android:layout_marginEnd="9dp">
+
+                <ImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_chevron_left"
+                    app:tint="@color/white"
+                    tools:ignore="ContentDescription" />
+            </FrameLayout>
+
+            <!-- Screen Title -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Retinal Scan"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:letterSpacing="-0.01" />
+
+            <!-- AI Badge -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EfficientNet"
+                android:textColor="#D9FFFFFF"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.06"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:background="@drawable/bg_ai_badge" />
+        </LinearLayout>
+
+        <!-- Meta card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_meta_card"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="9dp">
+
+            <!-- Meta icon -->
+            <FrameLayout
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/bg_meta_ico"
+                android:layout_marginEnd="9dp">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_eye_circle"
+                    app:tint="@color/white"
+                    tools:ignore="ContentDescription" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fundus Retinal Image"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DR Grading · 5 levels · Conf. 71%"
+                    android:textColor="#8DFFFFFF"
+                    android:textSize="10sp"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ── VIEW TOGGLE BAR ── -->
+    <LinearLayout
+        android:id="@+id/viewToggleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_card"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="View as:"
+            android:textColor="@color/muted"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <!-- Toggle pill -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_vtoggle"
+            android:orientation="horizontal"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/btnPatientView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Patient"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:background="@drawable/bg_vtoggle_active" />
+
+            <TextView
+                android:id="@+id/btnDoctorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Doctor"
+                android:textColor="@color/muted"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ── SCROLLABLE CONTENT (ViewFlipper for Patient/Doctor views) ── -->
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- ════════════════════════════
+             PATIENT VIEW (index 0)
+        ════════════════════════════ -->
+        <ScrollView
+            android:id="@+id/patientPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="11dp"
+                android:paddingBottom="16dp">
+
+                <!-- Warning status card -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/card_bg"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:layout_marginBottom="9dp">
+
+                    <!-- Warning icon -->
+                    <FrameLayout
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/bg_warn_icon"
+                        android:layout_marginEnd="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="⚠️"
+                            android:textSize="18sp" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Moderate Eye Damage (Grade 2)"
+                            android:textColor="@color/status_warn"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Diabetic retinopathy detected"
+                            android:textColor="@color/muted"
+                            android:textSize="10sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Retinal scan image box -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/bg_scan_box_retinal"
+                    android:layout_marginBottom="9dp">
+
+                    <!-- SVG-equivalent retinal diagram -->
+                    <ImageView
+                        android:id="@+id/retinalScanImage"
+                        android:layout_width="100dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_retinal_scan"
+                        tools:ignore="ContentDescription" />
+                </FrameLayout>
+
+                <!-- Severity Scale card -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/card_bg"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:layout_marginBottom="9dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SEVERITY SCALE"
+                        android:textColor="@color/muted"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.09"
+                        android:layout_marginBottom="7dp" />
+
+                    <!-- Severity bar -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="13dp"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="6dp"
+                        android:clipToOutline="true"
+                        android:background="@drawable/bg_sev_bar_container">
+
+                        <!-- None - green -->
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="#CC2A9D5C"
+                            android:alpha="0.8" />
+
+                        <!-- Mild - light green -->
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/sev_mild" />
+
+                        <!-- Moderate (YOU) - orange, highlighted with border -->
+                        <View
+                            android:id="@+id/sevSegActive"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_sev_active" />
+
+                        <!-- Severe - red -->
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="#99CC3333" />
+
+                        <!-- PDR - dark red -->
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="#998b0000" />
+                    </LinearLayout>
+
+                    <!-- Severity labels -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="None"
+                            android:textColor="@color/muted"
+                            android:textSize="9sp"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Mild"
+                            android:textColor="@color/muted"
+                            android:textSize="9sp"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="▲ You"
+                            android:textColor="@color/status_warn"
+                            android:textSize="9sp"
+                            android:textStyle="bold"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Severe"
+                            android:textColor="@color/muted"
+                            android:textSize="9sp"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="PDR"
+                            android:textColor="@color/muted"
+                            android:textSize="9sp"
+                            android:gravity="center" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- AI Explanation card -->
+                <LinearLayout
+                    android:id="@+id/aiCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/card_bg"
+                    android:orientation="vertical"
+                    android:padding="11dp"
+                    android:layout_marginBottom="9dp">
+
+                    <!-- AI card header row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="6dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="AI"
+                            android:textColor="@color/white"
+                            android:textSize="9sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.04"
+                            android:paddingStart="6dp"
+                            android:paddingEnd="6dp"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"
+                            android:background="@drawable/bg_ai_tag2"
+                            android:layout_marginEnd="6dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="What This Means for You"
+                            android:textColor="@color/hdr"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Your retinal scan shows moderate diabetes-related eye damage (Grade 2 of 4). Your eye's blood vessels are showing some leakage and small spots. Control your blood sugar and see an eye specialist soon to prevent it from getting worse."
+                        android:textColor="@color/sub"
+                        android:textSize="11sp"
+                        android:lineSpacingMultiplier="1.65" />
+                </LinearLayout>
+
+                <!-- What to do next card -->
+                <LinearLayout
+                    android:id="@+id/nextCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_next_card"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_marginBottom="9dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="WHAT TO DO NEXT"
+                        android:textColor="@color/hdr"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.06"
+                        android:layout_marginBottom="6dp" />
+
+                    <!-- Next item 1 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="👁️"
+                            android:textSize="12sp"
+                            android:layout_marginEnd="7dp"
+                            android:layout_marginTop="1dp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Book an appointment with an eye specialist (ophthalmologist)"
+                            android:textColor="@color/sub"
+                            android:textSize="11sp"
+                            android:lineSpacingMultiplier="1.5" />
+                    </LinearLayout>
+
+                    <!-- Next item 2 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🩺"
+                            android:textSize="12sp"
+                            android:layout_marginEnd="7dp"
+                            android:layout_marginTop="1dp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Manage your blood sugar levels tightly"
+                            android:textColor="@color/sub"
+                            android:textSize="11sp"
+                            android:lineSpacingMultiplier="1.5" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Share with Doctor button -->
+                <Button
+                    android:id="@+id/btnShareWithDoctor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="Share with Doctor"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.01"
+                    android:textAllCaps="true"
+                    android:background="@drawable/bg_share_btn"
+                    android:drawableStart="@drawable/ic_send"
+                    android:drawablePadding="7dp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- ════════════════════════════
+             DOCTOR VIEW (index 1)
+        ════════════════════════════ -->
+        <ScrollView
+            android:id="@+id/doctorPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="11dp"
+                android:paddingBottom="16dp">
+
+                <!-- Shared strip -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_next_card"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:layout_marginBottom="9dp">
+
+                    <!-- Avatar -->
+                    <FrameLayout
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/bg_shared_av"
+                        android:layout_marginEnd="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="A"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Aarav Shah, M 28"
+                            android:textColor="@color/hdr"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Shared · Mar 6, 2026 · Encrypted"
+                            android:textColor="@color/muted"
+                            android:textSize="10sp"
+                            android:layout_marginTop="1dp" />
+                    </LinearLayout>
+
+                    <!-- Lock icon -->
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@drawable/ic_lock"
+                        app:tint="@color/hdr"
+                        tools:ignore="ContentDescription" />
+                </LinearLayout>
+
+                <!-- DR Grading section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/card_bg"
+                    android:orientation="vertical"
+                    android:padding="11dp"
+                    android:layout_marginBottom="9dp">
+
+                    <!-- Section title -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="DR GRADING (ETDRS SCALE)"
+                        android:textColor="@color/muted"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.09"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Grade -->
+                    <include layout="@layout/item_doc_param"
+                        android:id="@+id/paramGrade" />
+
+                    <!-- Confidence -->
+                    <include layout="@layout/item_doc_param"
+                        android:id="@+id/paramConfidence" />
+
+                    <!-- Microaneurysms -->
+                    <include layout="@layout/item_doc_param"
+                        android:id="@+id/paramMicroaneurysms" />
+
+                    <!-- Hard Exudates -->
+                    <include layout="@layout/item_doc_param"
+                        android:id="@+id/paramHardExudates" />
+
+                    <!-- Neovascularization -->
+                    <include layout="@layout/item_doc_param"
+                        android:id="@+id/paramNeovascularization" />
+
+                    <!-- Macula -->
+                    <include layout="@layout/item_doc_param"
+                        android:id="@+id/paramMacula" />
+
+                </LinearLayout>
+
+                <!-- Clinical note -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_next_card"
+                    android:orientation="vertical"
+                    android:padding="9dp"
+                    android:layout_marginBottom="9dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="AI Clinical Note: Moderate NPDR with hard exudates in left inferior quadrant suggesting lipid exudation — risk of clinically significant macular oedema (CSME). HbA1c correlation essential. Ophthalmology referral within 4 weeks per NICE guidelines."
+                        android:textColor="@color/hdr"
+                        android:textSize="11sp"
+                        android:lineSpacingMultiplier="1.6" />
+                </LinearLayout>
+
+                <!-- Suggested next steps -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_next_card"
+                    android:orientation="vertical"
+                    android:padding="9dp"
+                    android:layout_marginBottom="9dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SUGGESTED NEXT STEPS"
+                        android:textColor="@color/hdr"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.03"
+                        android:layout_marginBottom="6dp" />
+
+                    <!-- Step 1 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="4dp">
+
+                        <FrameLayout
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@drawable/bg_rec_num"
+                            android:layout_marginEnd="6dp"
+                            android:layout_marginTop="1dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="1"
+                                android:textColor="@color/white"
+                                android:textSize="9sp"
+                                android:textStyle="bold" />
+                        </FrameLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Ophthalmology referral within 4 weeks"
+                            android:textColor="@color/sub"
+                            android:textSize="11sp"
+                            android:lineSpacingMultiplier="1.5" />
+                    </LinearLayout>
+
+                    <!-- Step 2 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="4dp">
+
+                        <FrameLayout
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@drawable/bg_rec_num"
+                            android:layout_marginEnd="6dp"
+                            android:layout_marginTop="1dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="2"
+                                android:textColor="@color/white"
+                                android:textSize="9sp"
+                                android:textStyle="bold" />
+                        </FrameLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="OCT macula to rule out CSME"
+                            android:textColor="@color/sub"
+                            android:textSize="11sp"
+                            android:lineSpacingMultiplier="1.5" />
+                    </LinearLayout>
+
+                    <!-- Step 3 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="4dp">
+
+                        <FrameLayout
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@drawable/bg_rec_num"
+                            android:layout_marginEnd="6dp"
+                            android:layout_marginTop="1dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="3"
+                                android:textColor="@color/white"
+                                android:textSize="9sp"
+                                android:textStyle="bold" />
+                        </FrameLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="ETDRS visual acuity assessment"
+                            android:textColor="@color/sub"
+                            android:textSize="11sp"
+                            android:lineSpacingMultiplier="1.5" />
+                    </LinearLayout>
+
+                    <!-- Step 4 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@drawable/bg_rec_num"
+                            android:layout_marginEnd="6dp"
+                            android:layout_marginTop="1dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="4"
+                                android:textColor="@color/white"
+                                android:textSize="9sp"
+                                android:textStyle="bold" />
+                        </FrameLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Optimize HbA1c target (&lt;7%) and BP control"
+                            android:textColor="@color/sub"
+                            android:textSize="11sp"
+                            android:lineSpacingMultiplier="1.5" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </ViewFlipper>
+
+</LinearLayout>

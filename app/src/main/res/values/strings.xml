@@ -1,79 +1,24 @@
 <resources>
     <string name="app_name">MedScan</string>
-    <string name="app_tagline">AI Medical Report Analyzer</string>
-    <!--  Nav  -->
+    <string name="tab_home">Home</string>
+    <string name="tab_reports">Reports</string>
+    <string name="tab_analyze">Analyze</string>
+    <string name="tab_profile">Profile</string>
+    
     <string name="nav_home">Home</string>
     <string name="nav_reports">Reports</string>
     <string name="nav_analyze">Analyze</string>
     <string name="nav_profile">Profile</string>
-    <!--  Home  -->
-    <string name="greeting">Good morning,</string>
-    <string name="user_name">Dr. Aarav Shah</string>
-    <string name="stat_reports">Reports</string>
-    <string name="stat_flagged">Flagged</string>
-    <string name="stat_accuracy">Accuracy</string>
-    <string name="quick_access">Quick Access</string>
-    <string name="recent_reports">Recent Reports</string>
-    <string name="ai_ready_title">AI Analysis Ready</string>
-    <string name="ai_ready_subtitle">Your CBC report needs review</string>
-    <!--  Reports  -->
-    <string name="reports_title">My Reports</string>
-    <string name="reports_subtitle">24 reports · 3 need review</string>
-    <string name="search_hint">Search reports…</string>
-    <string name="filter_all">All</string>
-    <string name="filter_lab">Lab</string>
-    <string name="filter_imaging">Imaging</string>
-    <string name="filter_ecg">ECG</string>
-    <!--  Upload  -->
-    <string name="upload_title">Upload Report</string>
-    <string name="upload_subtitle">Choose report type to analyze</string>
-    <string name="upload_drop_title">Tap to upload a file</string>
-    <string name="upload_drop_subtitle">PDF, JPG, PNG supported · Max 20MB</string>
-    <string name="btn_browse">BROWSE FILES</string>
-    <string name="select_report_type">Select Report Type</string>
-    <string name="btn_analyze">ANALYZE WITH AI</string>
-    <!--  Processing  -->
-    <string name="processing_title">Analyzing Report</string>
-    <string name="processing_subtitle">AI v3.2 · Please wait</string>
-    <string name="processing_headline">AI is analyzing your report</string>
-    <string name="processing_eta">This usually takes 10–20 seconds</string>
-    <string name="btn_view_results">VIEW RESULTS</string>
-    <string name="privacy_title">Privacy Guaranteed</string>
-    <string name="privacy_body">Your data is encrypted end-to-end and never shared with third parties.</string>
-    <!--  Analysis  -->
-    <string name="analysis_title">Analysis</string>
-    <string name="analysis_subtitle">AI-powered medical insights</string>
-    <string name="no_report_title">No report selected</string>
-    <string name="no_report_body">Upload a report or choose from your history to get AI-powered insights.</string>
-    <string name="btn_upload_new">UPLOAD NEW REPORT</string>
-    <string name="btn_view_existing">VIEW EXISTING REPORTS</string>
-    <!--  View Toggle  -->
-    <string name="view_as">View as:</string>
-    <string name="view_patient">Patient</string>
-    <string name="view_doctor">Doctor</string>
-    <string name="btn_share_doctor">SHARE WITH DOCTOR</string>
-    <string name="section_ai_summary">What This Means for You</string>
-    <string name="section_next_steps">What to do next</string>
-    <!--  Profile  -->
-    <string name="profile_role">General Physician · Mumbai</string>
-    <string name="blood_group_label">Blood</string>
-    <string name="age_label">Age</string>
-    <string name="allergies_label">Allergies</string>
-    <string name="section_medical">Medical</string>
-    <string name="section_preferences">Preferences</string>
-    <string name="item_medical_history">Medical History</string>
-    <string name="item_medications">Current Medications</string>
-    <string name="item_share_doctor">Share with Doctor</string>
-    <string name="item_notifications">Notifications</string>
-    <string name="item_privacy">Privacy &amp; Security</string>
-    <string name="item_help">Help &amp; Support</string>
-    <string name="item_signout">Sign Out</string>
-    <string name="btn_edit">EDIT</string>
-    <!--  Share  -->
-    <string name="share_title">Share with Doctor</string>
-    <string name="share_subtitle">Send your reports securely</string>
-    <string name="select_doctor">Select Doctor</string>
-    <string name="select_reports">Select Reports to Share</string>
-    <string name="encryption_note">Reports are shared end-to-end encrypted. Only the selected doctor can view them.</string>
-    <string name="btn_send_reports">SHARE 2 REPORTS WITH DR. R. MEHTA</string>
+
+    <string name="btn_share_doctor">Share with Doctor</string>
+    <string name="btn_upload_new">Upload New Report</string>
+    <string name="btn_view_existing">View Existing Reports</string>
+    <string name="btn_analyze_ai">Analyze with AI →</string>
+    <string name="btn_view_results">View Results →</string>
+    <string name="view_as_patient">Patient</string>
+    <string name="view_as_doctor">Doctor</string>
+    <string name="label_view_as">View as:</string>
+    <string name="privacy_note">Reports are shared end-to-end encrypted. Only the selected doctor can view them.</string>
+    <string name="ai_processing_title">AI is analyzing your report</string>
+    <string name="ai_processing_sub">This usually takes 10–20 seconds</string>
 </resources>

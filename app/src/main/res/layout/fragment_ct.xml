@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_page">
+
+    <!-- ANALYSIS HEADER -->
+    <LinearLayout
+        android:id="@+id/analysisHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/hdr"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="15dp"
+        android:elevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginBottom="11dp">
+
+            <FrameLayout
+                android:id="@+id/btnBack"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/bg_back_btn"
+                android:layout_marginEnd="9dp">
+                <ImageView android:layout_width="13dp" android:layout_height="13dp" android:layout_gravity="center" android:src="@drawable/ic_chevron_left" app:tint="@color/white" tools:ignore="ContentDescription" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Lung CT Scan"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:letterSpacing="-0.01" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ResNet34"
+                android:textColor="@color/text_on_dark_faint"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.06"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:background="@drawable/bg_ai_badge" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_meta_card"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="9dp">
+
+            <FrameLayout
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/bg_meta_ico"
+                android:layout_marginEnd="9dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🔬" android:textSize="14sp" />
+            </FrameLayout>
+
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Chest CT Scan Image" android:textColor="@color/white" android:textSize="13sp" android:textStyle="bold" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mar 6, 2026" android:textColor="@color/text_on_dark_sub" android:textSize="10sp" android:layout_marginTop="2dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <!-- VIEW TOGGLE -->
+    <LinearLayout
+        android:id="@+id/viewToggleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_card"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="View as:"
+            android:textColor="@color/muted"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_vtoggle"
+            android:orientation="horizontal"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/btnPatientView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Patient"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:background="@drawable/bg_vtoggle_active" />
+
+            <TextView
+                android:id="@+id/btnDoctorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Doctor"
+                android:textColor="@color/muted"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ViewFlipper android:id="@+id/viewFlipper" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+
+        <ScrollView android:id="@+id/patientPanel" android:layout_width="match_parent" android:layout_height="match_parent" android:scrollbars="none">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="11dp" android:paddingBottom="16dp">
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/status_danger_light" android:gravity="center_vertical" android:orientation="horizontal" android:padding="10dp" android:layout_marginBottom="9dp">
+                    <FrameLayout android:layout_width="36dp" android:layout_height="36dp" android:background="@color/status_danger_light" android:layout_marginEnd="10dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🚨" android:textSize="18sp" />
+                    </FrameLayout>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Please See a Doctor Urgently" android:textColor="@color/status_danger" android:textSize="13sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Possible abnormality detected" android:textColor="@color/status_danger_text" android:textSize="10sp" android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- CT scan box -->
+                <FrameLayout android:layout_width="match_parent" android:layout_height="120dp" android:background="@color/ct_bg" android:layout_marginBottom="9dp">
+                    <ImageView android:id="@+id/ctImage" android:layout_width="110dp" android:layout_height="110dp" android:layout_gravity="center" android:src="@drawable/ic_ct_scan" tools:ignore="ContentDescription" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom|start" android:text="URGENT REVIEW" android:textColor="@color/ct_finding_txt" android:textSize="9sp" android:textStyle="bold" android:padding="6dp" />
+                </FrameLayout>
+
+                <!-- Classification -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/card_bg" android:orientation="vertical" android:padding="11dp" android:layout_marginBottom="9dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="WHAT THE AI FOUND" android:textColor="@color/muted" android:textSize="10sp" android:textStyle="bold" android:letterSpacing="0.09" android:layout_marginBottom="10dp" />
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:layout_marginBottom="6dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Abnormal" android:textColor="@color/status_danger" android:textSize="12sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="78%" android:textColor="@color/status_danger" android:textSize="14sp" android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:layout_marginBottom="6dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Other type" android:textColor="@color/txt" android:textSize="12sp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="12%" android:textColor="@color/muted" android:textSize="13sp" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Normal" android:textColor="@color/txt" android:textSize="12sp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="7%" android:textColor="@color/status_ok" android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Urgent notice -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/status_danger_light" android:orientation="horizontal" android:gravity="center_vertical" android:padding="10dp" android:layout_marginBottom="9dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🚨" android:textSize="14sp" android:layout_marginEnd="8dp" />
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Please act soon. Early care leads to better outcomes. This is AI screening only — your doctor will guide next steps." android:textColor="@color/status_danger_text" android:textSize="11sp" android:lineSpacingMultiplier="1.5" />
+                </LinearLayout>
+                    <!-- AI Explanation card -->
+                    <LinearLayout
+                        android:id="@+id/aiCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/card_bg"
+                        android:orientation="vertical"
+                        android:padding="11dp"
+                        android:layout_marginBottom="9dp">
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:layout_marginBottom="6dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AI" android:textColor="@color/white" android:textSize="9sp" android:textStyle="bold" android:letterSpacing="0.04" android:paddingStart="6dp" android:paddingEnd="6dp" android:paddingTop="2dp" android:paddingBottom="2dp" android:background="@drawable/bg_ai_tag2" android:layout_marginEnd="6dp" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="What This Means for You" android:textColor="@color/hdr" android:textSize="12sp" android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvPatientReport"
+                            android:text="Loading AI analysis..."
+                            android:textColor="@color/sub"
+                            android:textSize="11sp"
+                            android:lineSpacingMultiplier="1.65" />
+                    </LinearLayout>
+                    <Button
+                        android:id="@+id/btnShareWithDoctor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:text="Share with Doctor"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:background="@drawable/bg_share_btn"
+                        android:drawableStart="@drawable/ic_send"
+                        android:drawablePadding="7dp" />
+            </LinearLayout>
+        </ScrollView>
+
+        <ScrollView android:id="@+id/doctorPanel" android:layout_width="match_parent" android:layout_height="match_parent" android:scrollbars="none" android:visibility="gone">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="11dp" android:paddingBottom="16dp">
+                    <!-- Shared strip -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_next_card"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        android:layout_marginBottom="9dp">
+
+                        <FrameLayout android:layout_width="30dp" android:layout_height="30dp" android:background="@drawable/bg_shared_av" android:layout_marginEnd="8dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="A" android:textColor="@color/white" android:textSize="12sp" android:textStyle="bold" />
+                        </FrameLayout>
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Aarav Shah, M 28" android:textColor="@color/hdr" android:textSize="11sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Shared · Mar 6, 2026 · Encrypted" android:textColor="@color/muted" android:textSize="10sp" android:layout_marginTop="1dp" />
+                        </LinearLayout>
+
+                        <ImageView android:layout_width="14dp" android:layout_height="14dp" android:layout_marginStart="8dp" android:src="@drawable/ic_lock" app:tint="@color/hdr" tools:ignore="ContentDescription" />
+                    </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/card_bg" android:orientation="vertical" android:padding="11dp" android:layout_marginBottom="9dp">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="MALIGNANCY CLASSIFICATION" android:textColor="@color/muted" android:textSize="10sp" android:textStyle="bold" android:letterSpacing="0.09" android:layout_marginBottom="8dp" />
+                    <include layout="@layout/item_doc_param" android:id="@+id/paramPrimaryFinding" />
+                    <include layout="@layout/item_doc_param" android:id="@+id/paramSquamous" />
+                    <include layout="@layout/item_doc_param" android:id="@+id/paramNormalTissue" />
+                    <include layout="@layout/item_doc_param" android:id="@+id/paramLocation" />
+                    <include layout="@layout/item_doc_param" android:id="@+id/paramSize" />
+                </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/bg_next_card" android:orientation="vertical" android:padding="9dp" android:layout_marginBottom="9dp">
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/tvDoctorReport"
+                        android:text="Loading clinical report..." android:textColor="@color/hdr" android:textSize="11sp" android:lineSpacingMultiplier="1.6" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/bg_next_card" android:orientation="vertical" android:padding="9dp" android:layout_marginBottom="9dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="URGENT — SUGGESTED NEXT STEPS" android:textColor="@color/hdr" android:textSize="10sp" android:textStyle="bold" android:letterSpacing="0.03" android:layout_marginBottom="6dp" />
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="top" android:orientation="horizontal" android:layout_marginBottom="4dp">
+                            <FrameLayout android:layout_width="16dp" android:layout_height="16dp" android:background="@drawable/bg_rec_num" android:layout_marginEnd="6dp" android:layout_marginTop="1dp">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="1" android:textColor="@color/white" android:textSize="9sp" android:textStyle="bold" />
+                            </FrameLayout>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Urgent pulmonologist + oncology referral" android:textColor="@color/sub" android:textSize="11sp" android:lineSpacingMultiplier="1.5" />
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="top" android:orientation="horizontal" android:layout_marginBottom="4dp">
+                            <FrameLayout android:layout_width="16dp" android:layout_height="16dp" android:background="@drawable/bg_rec_num" android:layout_marginEnd="6dp" android:layout_marginTop="1dp">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="2" android:textColor="@color/white" android:textSize="9sp" android:textStyle="bold" />
+                            </FrameLayout>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Contrast CT (chest/abdomen/pelvis) for staging" android:textColor="@color/sub" android:textSize="11sp" android:lineSpacingMultiplier="1.5" />
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="top" android:orientation="horizontal" android:layout_marginBottom="4dp">
+                            <FrameLayout android:layout_width="16dp" android:layout_height="16dp" android:background="@drawable/bg_rec_num" android:layout_marginEnd="6dp" android:layout_marginTop="1dp">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="3" android:textColor="@color/white" android:textSize="9sp" android:textStyle="bold" />
+                            </FrameLayout>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="PET-CT if staging workup confirms suspicion" android:textColor="@color/sub" android:textSize="11sp" android:lineSpacingMultiplier="1.5" />
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="top" android:orientation="horizontal" android:layout_marginBottom="4dp">
+                            <FrameLayout android:layout_width="16dp" android:layout_height="16dp" android:background="@drawable/bg_rec_num" android:layout_marginEnd="6dp" android:layout_marginTop="1dp">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="4" android:textColor="@color/white" android:textSize="9sp" android:textStyle="bold" />
+                            </FrameLayout>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="CT-guided biopsy for histopathological confirmation" android:textColor="@color/sub" android:textSize="11sp" android:lineSpacingMultiplier="1.5" />
+                        </LinearLayout>
+                    </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </ViewFlipper>
+</LinearLayout>

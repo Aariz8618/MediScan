@@ -1,123 +1,149 @@
 package com.aariz.mediscan
 
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.activity.OnBackPressedCallback
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.aariz.mediscan.databinding.ActivityMainBinding
+import androidx.fragment.app.FragmentManager
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    // Tab identifiers
+    enum class Tab { HOME, REPORTS, ANALYZE, PROFILE }
 
-    private lateinit var navHome:     LinearLayout
-    private lateinit var navReports:  LinearLayout
-    private lateinit var navAnalysis: LinearLayout
-    private lateinit var navProfile:  LinearLayout
+    private var currentTab = Tab.HOME
+
+    // Nav item data
+    private data class NavItem(
+        val container: LinearLayout,
+        val icon: ImageView,
+        val label: TextView,
+        val pip: View,
+        val tab: Tab
+    )
+
+    private lateinit var navItems: List<NavItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-        window.statusBarColor = android.graphics.Color.parseColor("#1B7A5A")
-
-        navHome     = binding.navHome
-        navReports  = binding.navReports
-        navAnalysis = binding.navAnalysis
-        navProfile  = binding.navProfile
-
-        // ── Edge-to-edge + inset handling ────────────────────────────────
-        // Automatically adapts for gesture navigation (swipe pill) AND
-        // 3-button navigation — no hardcoded dp values needed.
-        WindowInsetHelper.apply(
-            activity          = this,
-            floatingNavCard   = binding.bnav,              // CardView in CoordinatorLayout
-            fragmentContainer = binding.fragmentContainer,
-            baseNavMarginDp   = 14                         // matches layout_marginBottom in XML
+        navItems = listOf(
+            NavItem(
+                findViewById(R.id.navHome),
+                findViewById(R.id.navHomeIcon),
+                findViewById(R.id.navHomeLabel),
+                findViewById(R.id.navHomePip),
+                Tab.HOME
+            ),
+            NavItem(
+                findViewById(R.id.navReports),
+                findViewById(R.id.navReportsIcon),
+                findViewById(R.id.navReportsLabel),
+                findViewById(R.id.navReportsPip),
+                Tab.REPORTS
+            ),
+            NavItem(
+                findViewById(R.id.navAnalyze),
+                findViewById(R.id.navAnalyzeIcon),
+                findViewById(R.id.navAnalyzeLabel),
+                findViewById(R.id.navAnalyzePip),
+                Tab.ANALYZE
+            ),
+            NavItem(
+                findViewById(R.id.navProfile),
+                findViewById(R.id.navProfileIcon),
+                findViewById(R.id.navProfileLabel),
+                findViewById(R.id.navProfilePip),
+                Tab.PROFILE
+            )
         )
-        // ─────────────────────────────────────────────────────────────────
+
+        navItems.forEach { item ->
+            item.container.setOnClickListener { selectTab(item.tab) }
+        }
+
+        // Listen to back-stack changes to keep nav in sync
+        supportFragmentManager.addOnBackStackChangedListener {
+            syncNavFromCurrentFragment()
+        }
 
         if (savedInstanceState == null) {
-            loadFragment(HomeFragment(), "home", addToBack = false)
-            setActiveNav(navHome)
+            selectTab(Tab.HOME)
         }
-
-        navHome.setOnClickListener {
-            supportFragmentManager.popBackStack(null,
-                androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            loadFragment(HomeFragment(), "home", addToBack = false)
-            setActiveNav(navHome)
-        }
-
-        navReports.setOnClickListener {
-            loadFragment(ReportsFragment(), "reports", addToBack = true)
-            setActiveNav(navReports)
-        }
-
-        navAnalysis.setOnClickListener {
-            loadFragment(AnalysisFragment(), "analysis", addToBack = true)
-            setActiveNav(navAnalysis)
-        }
-
-        navProfile.setOnClickListener {
-            loadFragment(ProfileFragment(), "profile", addToBack = true)
-            setActiveNav(navProfile)
-        }
-
-        // ── Back press — replaces deprecated onBackPressed() ────────────
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (supportFragmentManager.backStackEntryCount > 0) {
-                    supportFragmentManager.popBackStack()
-                    // Sync nav highlight back to Home when stack becomes empty
-                    if (supportFragmentManager.backStackEntryCount == 1) {
-                        setActiveNav(navHome)
-                    }
-                } else {
-                    // No back stack — let the system handle it (exit app)
-                    isEnabled = false
-                    onBackPressedDispatcher.onBackPressed()
-                }
-            }
-        })
     }
 
-    // ── Called by child fragments to navigate within the container ──────
-    fun navigateTo(fragment: Fragment, tag: String) {
+    /** Switch the root-level tab, clearing the back stack. */
+    fun selectTab(tab: Tab) {
+        currentTab = tab
+        val fragment: Fragment = when (tab) {
+            Tab.HOME    -> HomeFragment()
+            Tab.REPORTS -> ReportsFragment()
+            Tab.ANALYZE -> AnalysisEmptyFragment()
+            Tab.PROFILE -> ProfileFragment()
+        }
+        // Pop everything, replace with new root
+        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         supportFragmentManager.beginTransaction()
-            .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-            .replace(binding.fragmentContainer.id, fragment, tag)
-            .addToBackStack(tag)
+            .replace(R.id.fragmentContainer, fragment)
             .commit()
+        updateNavUI(tab)
     }
 
-    private fun loadFragment(fragment: Fragment, tag: String, addToBack: Boolean) {
-        val tx = supportFragmentManager.beginTransaction()
-            .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-            .replace(binding.fragmentContainer.id, fragment, tag)
-
-        if (addToBack) tx.addToBackStack(tag)
-        tx.commit()
+    private fun syncNavFromCurrentFragment() {
+        val frag = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
+        val tab = when (frag) {
+            is HomeFragment          -> Tab.HOME
+            is ReportsFragment       -> Tab.REPORTS
+            is AnalysisEmptyFragment -> Tab.ANALYZE
+            is ProfileFragment       -> Tab.PROFILE
+            // Detail screens belong under Reports tab
+            is LabFragment, is EcgFragment, is MriFragment,
+            is XrayFragment, is CtFragment, is RetinalFragment,
+            is PrescriptionFragment  -> Tab.REPORTS
+            is UploadFragment, is ProcessingFragment -> Tab.REPORTS
+            is ShareFragment         -> Tab.PROFILE
+            else                     -> currentTab
+        }
+        updateNavUI(tab)
     }
 
-    fun setActiveNav(activeNav: LinearLayout) {
-        listOf(navHome, navReports, navAnalysis, navProfile).forEach { nav ->
-            val icon  = nav.getChildAt(0)
-            val label = nav.getChildAt(1)
-            val dot   = nav.getChildAt(2)
-            val isActive = nav == activeNav
-            val tint = if (isActive) "#1B7A5A" else "#A0B5B1"
+    private fun updateNavUI(activeTab: Tab) {
+        val activeColor = ContextCompat.getColor(this, R.color.hdr)
+        val inactiveColor = ContextCompat.getColor(this, R.color.muted)
 
-            if (icon  is android.widget.ImageView)
-                icon.imageTintList = android.content.res.ColorStateList.valueOf(
-                    android.graphics.Color.parseColor(tint))
-            if (label is android.widget.TextView)
-                label.setTextColor(android.graphics.Color.parseColor(tint))
-            if (dot is View)
-                dot.visibility = if (isActive) View.VISIBLE else View.GONE
+        navItems.forEach { item ->
+            val isActive = item.tab == activeTab
+            item.label.setTextColor(if (isActive) activeColor else inactiveColor)
+            item.label.setTypeface(null, if (isActive) android.graphics.Typeface.BOLD else android.graphics.Typeface.NORMAL)
+            item.pip.visibility = if (isActive) View.VISIBLE else View.INVISIBLE
+
+            // Tint icon
+            val tint = if (isActive) activeColor else inactiveColor
+            item.icon.colorFilter = PorterDuffColorFilter(tint, PorterDuff.Mode.SRC_IN)
+
+            // Background highlight on active icon area
+            if (isActive) {
+                item.icon.setBackgroundResource(R.drawable.bg_nav_icon_active)
+            } else {
+                item.icon.setBackgroundResource(0)
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+        } else if (currentTab != Tab.HOME) {
+            selectTab(Tab.HOME)
+        } else {
+            super.onBackPressed()
         }
     }
 }

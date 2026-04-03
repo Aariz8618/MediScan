@@ -1,81 +1,107 @@
 package com.aariz.mediscan
 
-import android.app.Activity
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 
 class UploadFragment : Fragment() {
 
-    private var selectedType: String = "lab"
-    private var selectedFileUri: Uri? = null
+    private var selectedUri: Uri? = null
+    private var selectedType: String = "lab"   // default
 
-    private val filePicker = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            selectedFileUri = result.data?.data
-            goToProcessing()
+    private val pickFile = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        uri?.let {
+            selectedUri = it
+            Toast.makeText(requireContext(), "File selected ✓", Toast.LENGTH_SHORT).show()
         }
     }
 
-    override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?) =
-        i.inflate(R.layout.activity_upload, c, false)
+    private val typeCards by lazy {
+        listOf(
+            R.id.typeLab, R.id.typeEcg, R.id.typeMri, R.id.typeXray,
+            R.id.typeCt, R.id.typeRetinal, R.id.typeRx, R.id.typeOther
+        )
+    }
 
-    override fun onViewCreated(v: View, s: Bundle?) {
-        super.onViewCreated(v, s)
+    // Maps card ID → API image_type value
+    private val typeMap = mapOf(
+        R.id.typeLab     to "lab",
+        R.id.typeEcg     to "ecg",
+        R.id.typeMri     to "brain_mri",
+        R.id.typeXray    to "chest_xray",
+        R.id.typeCt      to "lung_ct",
+        R.id.typeRetinal to "retinal",
+        R.id.typeRx      to "prescription",
+        R.id.typeOther   to "lab"
+    )
 
-        // Back → Analysis
-        v.findViewById<View>(R.id.btnBack).setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = inflater.inflate(R.layout.fragment_upload, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        view.findViewById<FrameLayout>(R.id.btnBack).setOnClickListener {
+            parentFragmentManager.popBackStack()
         }
 
-        // Browse / drop zone / analyze
-        v.findViewById<View>(R.id.btnBrowse).setOnClickListener { openFilePicker() }
-        v.findViewById<View>(R.id.dropZone).setOnClickListener  { openFilePicker() }
-        v.findViewById<View>(R.id.btnAnalyze).setOnClickListener {
-            if (selectedFileUri != null) goToProcessing() else openFilePicker()
+        view.findViewById<LinearLayout>(R.id.dropZone).setOnClickListener {
+            pickFile.launch("*/*")
+        }
+
+        view.findViewById<Button>(R.id.btnBrowse).setOnClickListener {
+            pickFile.launch("*/*")
         }
 
         // Type card selection
-        val typeCards = mapOf(
-            "lab"     to v.findViewById<LinearLayout>(R.id.typeLab),
-            "ecg"     to v.findViewById(R.id.typeEcg),
-            "mri"     to v.findViewById(R.id.typeMri),
-            "xray"    to v.findViewById(R.id.typeXray),
-            "ct"      to v.findViewById(R.id.typeCt),
-            "retinal" to v.findViewById(R.id.typeRetinal)
-        )
-
-        typeCards.forEach { (type, card) ->
-            card.setOnClickListener {
-                selectedType = type
-                typeCards.forEach { (t, c) ->
-                    c.background = ContextCompat.getDrawable(
-                        requireContext(),
-                        if (t == selectedType) R.drawable.bg_type_on else R.drawable.bg_type_off
-                    )
-                }
+        typeCards.forEach { id ->
+            view.findViewById<LinearLayout>(id)?.setOnClickListener { card ->
+                deselectAll(view)
+                card.setBackgroundResource(R.drawable.bg_type_card_active)
+                selectedType = typeMap[id] ?: "lab"
             }
         }
-    }
 
-    private fun openFilePicker() {
-        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
-            type = "*/*"
-            putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("application/pdf", "image/jpeg", "image/png"))
+        // Analyze button → go to ProcessingFragment with data
+        view.findViewById<Button>(R.id.btnAnalyze).setOnClickListener {
+            val uri = selectedUri
+            if (uri == null) {
+                Toast.makeText(requireContext(), "Please select a file first", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            navigateToProcessing(uri, selectedType)
         }
-        filePicker.launch(intent)
     }
 
-    private fun goToProcessing() {
-        (activity as? MainActivity)?.navigateTo(ProcessingFragment(), "processing")
+    private fun deselectAll(view: View) {
+        typeCards.forEach { id ->
+            view.findViewById<LinearLayout>(id)?.setBackgroundResource(R.drawable.bg_type_card)
+        }
+    }
+
+    private fun navigateToProcessing(uri: Uri, type: String) {
+        val fragment = ProcessingFragment().apply {
+            arguments = Bundle().apply {
+                putString("file_uri", uri.toString())
+                putString("analysis_type", type)
+                putString("patient_name", "Patient")
+                putInt("patient_age", 25)
+                putString("patient_gender", "Not specified")
+            }
+        }
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

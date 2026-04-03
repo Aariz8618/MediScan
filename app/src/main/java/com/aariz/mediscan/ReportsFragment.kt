@@ -1,80 +1,65 @@
-package com.aariz.mediscan
-
+package com.aariz.mediscan;
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.RecyclerView
-import com.aariz.mediscan.adapter.ReportsAdapter
-import com.aariz.mediscan.model.RType
-import com.aariz.mediscan.ui.ReportsVM
 
 class ReportsFragment : Fragment() {
 
-    private val vm: ReportsVM by viewModels()
-    private val adapter = ReportsAdapter { report ->
-        // TODO: navigate to report detail screen
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = inflater.inflate(R.layout.fragment_reports, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Filter tabs
+        val tabAll = view.findViewById<TextView>(R.id.tabAll)
+        val tabLab = view.findViewById<TextView>(R.id.tabLab)
+        val tabImaging = view.findViewById<TextView>(R.id.tabImaging)
+        val tabEcg = view.findViewById<TextView>(R.id.tabEcg)
+        val tabs = listOf(tabAll, tabLab, tabImaging, tabEcg)
+
+        fun setActiveTab(active: TextView) {
+            tabs.forEach { it.setBackgroundResource(0) }
+            active.setBackgroundResource(R.drawable.bg_tab_active)
+        }
+        tabs.forEach { tab ->
+            tab.setOnClickListener { setActiveTab(tab) }
+        }
+
+        // Report cards → open detail screens
+        view.findViewById<LinearLayout>(R.id.cardCbc).setOnClickListener {
+            navigateTo(LabFragment())
+        }
+        view.findViewById<LinearLayout>(R.id.cardEcg).setOnClickListener {
+            navigateTo(EcgFragment())
+        }
+        view.findViewById<LinearLayout>(R.id.cardMri).setOnClickListener {
+            navigateTo(MriFragment())
+        }
+        view.findViewById<LinearLayout>(R.id.cardXray).setOnClickListener {
+            navigateTo(XrayFragment())
+        }
+        view.findViewById<LinearLayout>(R.id.cardCt).setOnClickListener {
+            navigateTo(CtFragment())
+        }
+        view.findViewById<LinearLayout>(R.id.cardRetinal).setOnClickListener {
+            navigateTo(RetinalFragment())
+        }
+        view.findViewById<LinearLayout>(R.id.cardRx).setOnClickListener {
+            navigateTo(PrescriptionFragment())
+        }
     }
 
-    override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?) =
-        i.inflate(R.layout.fragment_reports, c, false)
-
-    override fun onViewCreated(v: View, s: Bundle?) {
-        super.onViewCreated(v, s)
-
-        // ── Back button ───────────────────────────────────────
-        v.findViewById<View>(R.id.btnBack).setOnClickListener {
-            parentFragmentManager.popBackStack()
-        }
-
-        // ── RecyclerView ──────────────────────────────────────
-        v.findViewById<RecyclerView>(R.id.rvReports).adapter = adapter
-
-        // ── Filter tabs ───────────────────────────────────────
-        val tabs = listOf(
-            v.findViewById<TextView>(R.id.tabAll),
-            v.findViewById(R.id.tabLab),
-            v.findViewById(R.id.tabImg),
-            v.findViewById(R.id.tabEcg)
-        )
-
-        fun selectTab(index: Int, filter: () -> Unit) {
-            tabs.forEachIndexed { i, tab ->
-                val on = i == index
-                tab.background = ContextCompat.getDrawable(
-                    requireContext(),
-                    if (on) R.drawable.bg_tab_on else R.drawable.bg_tab_off
-                )
-                tab.setTextColor(ContextCompat.getColor(
-                    requireContext(),
-                    if (on) android.R.color.white else R.color.ic_muted
-                ))
-            }
-            filter()
-        }
-
-        tabs[0].setOnClickListener { selectTab(0) { vm.filterAll() } }
-        tabs[1].setOnClickListener { selectTab(1) { vm.filter(RType.LAB) } }
-        tabs[2].setOnClickListener { selectTab(2) { vm.filterImaging() } }
-        tabs[3].setOnClickListener { selectTab(3) { vm.filter(RType.ECG) } }
-
-        // ── Observe list ──────────────────────────────────────
-        vm.list.observe(viewLifecycleOwner) { list ->
-            adapter.submitList(list)
-            v.findViewById<View>(R.id.emptyState).visibility =
-                if (list.isEmpty()) View.VISIBLE else View.GONE
-            v.findViewById<View>(R.id.rvReports).visibility =
-                if (list.isEmpty()) View.GONE else View.VISIBLE
-        }
-
-        // ── Observe counts ────────────────────────────────────
-        vm.counts.observe(viewLifecycleOwner) { (total, flagged) ->
-            v.findViewById<TextView>(R.id.tvSub).text =
-                "$total reports · $flagged need review"
-        }
+    private fun navigateTo(fragment: Fragment) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

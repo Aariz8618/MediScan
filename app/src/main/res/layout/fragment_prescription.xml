@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_page">
+
+    <!-- ANALYSIS HEADER -->
+    <LinearLayout
+        android:id="@+id/analysisHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/hdr"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="15dp"
+        android:elevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginBottom="11dp">
+
+            <FrameLayout
+                android:id="@+id/btnBack"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/bg_back_btn"
+                android:layout_marginEnd="9dp">
+                <ImageView android:layout_width="13dp" android:layout_height="13dp" android:layout_gravity="center" android:src="@drawable/ic_chevron_left" app:tint="@color/white" tools:ignore="ContentDescription" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Prescription"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:letterSpacing="-0.01" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gemini Vision"
+                android:textColor="@color/text_on_dark_faint"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.06"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:background="@drawable/bg_ai_badge" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_meta_card"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="9dp">
+
+            <FrameLayout
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/bg_meta_ico"
+                android:layout_marginEnd="9dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="💊" android:textSize="14sp" />
+            </FrameLayout>
+
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dr. Sharma · Handwritten Rx" android:textColor="@color/white" android:textSize="13sp" android:textStyle="bold" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Analyzed via Gemini Vision AI" android:textColor="@color/text_on_dark_sub" android:textSize="10sp" android:layout_marginTop="2dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <!-- VIEW TOGGLE -->
+    <LinearLayout
+        android:id="@+id/viewToggleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_card"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="View as:"
+            android:textColor="@color/muted"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_vtoggle"
+            android:orientation="horizontal"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/btnPatientView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Patient"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:background="@drawable/bg_vtoggle_active" />
+
+            <TextView
+                android:id="@+id/btnDoctorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Doctor"
+                android:textColor="@color/muted"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ViewFlipper android:id="@+id/viewFlipper" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+
+        <ScrollView android:id="@+id/patientPanel" android:layout_width="match_parent" android:layout_height="match_parent" android:scrollbars="none">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="11dp" android:paddingBottom="16dp">
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/card_bg" android:gravity="center_vertical" android:orientation="horizontal" android:padding="10dp" android:layout_marginBottom="9dp">
+                    <FrameLayout android:layout_width="36dp" android:layout_height="36dp" android:background="@color/status_ok_light" android:layout_marginEnd="10dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="✅" android:textSize="18sp" />
+                    </FrameLayout>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="3 Medicines · No Dangerous Interactions" android:textColor="@color/status_ok" android:textSize="13sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Safe to take as prescribed" android:textColor="@color/muted" android:textSize="10sp" android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Medicine 1 -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/card_bg" android:orientation="vertical" android:padding="11dp" android:layout_marginBottom="9dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:layout_marginBottom="6dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Paracetamol 500mg" android:textColor="@color/hdr" android:textSize="13sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Safe" android:textColor="@color/status_ok" android:textSize="10sp" android:textStyle="bold" android:background="@color/status_ok_light" android:paddingStart="6dp" android:paddingEnd="6dp" android:paddingTop="2dp" android:paddingBottom="2dp" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🕐 3× daily" android:textColor="@color/sub" android:textSize="11sp" android:layout_marginEnd="10dp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🍽️ After food" android:textColor="@color/sub" android:textSize="11sp" android:layout_marginEnd="10dp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📅 5 days" android:textColor="@color/sub" android:textSize="11sp" />
+                    </LinearLayout>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="For fever and pain" android:textColor="@color/muted" android:textSize="11sp" android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+                <!-- Medicine 2 -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/card_bg" android:orientation="vertical" android:padding="11dp" android:layout_marginBottom="9dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:layout_marginBottom="6dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Azithromycin 250mg" android:textColor="@color/hdr" android:textSize="13sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Safe" android:textColor="@color/status_ok" android:textSize="10sp" android:textStyle="bold" android:background="@color/status_ok_light" android:paddingStart="6dp" android:paddingEnd="6dp" android:paddingTop="2dp" android:paddingBottom="2dp" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="☀️ Once daily" android:textColor="@color/sub" android:textSize="11sp" android:layout_marginEnd="10dp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🌅 Empty stomach" android:textColor="@color/sub" android:textSize="11sp" android:layout_marginEnd="10dp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📅 3 days" android:textColor="@color/sub" android:textSize="11sp" />
+                    </LinearLayout>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Antibiotic — complete the course" android:textColor="@color/muted" android:textSize="11sp" android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+                <!-- Medicine 3 -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/card_bg" android:orientation="vertical" android:padding="11dp" android:layout_marginBottom="9dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:layout_marginBottom="6dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Cetirizine 10mg" android:textColor="@color/hdr" android:textSize="13sp" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚠️ Drowsy" android:textColor="@color/status_warn" android:textSize="10sp" android:textStyle="bold" android:background="@color/status_warn_light" android:paddingStart="6dp" android:paddingEnd="6dp" android:paddingTop="2dp" android:paddingBottom="2dp" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🌙 At night" android:textColor="@color/sub" android:textSize="11sp" android:layout_marginEnd="10dp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📅 5 days" android:textColor="@color/sub" android:textSize="11sp" />
+                    </LinearLayout>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚠️ May cause drowsiness" android:textColor="@color/status_warn" android:textSize="11sp" android:layout_marginTop="4dp" />
+                </LinearLayout>
+                    <!-- AI Explanation card -->
+                    <LinearLayout
+                        android:id="@+id/aiCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/card_bg"
+                        android:orientation="vertical"
+                        android:padding="11dp"
+                        android:layout_marginBottom="9dp">
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:layout_marginBottom="6dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AI" android:textColor="@color/white" android:textSize="9sp" android:textStyle="bold" android:letterSpacing="0.04" android:paddingStart="6dp" android:paddingEnd="6dp" android:paddingTop="2dp" android:paddingBottom="2dp" android:background="@drawable/bg_ai_tag2" android:layout_marginEnd="6dp" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="What This Means for You" android:textColor="@color/hdr" android:textSize="12sp" android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvPatientReport"
+                            android:text="Loading AI analysis..."
+                            android:textColor="@color/sub"
+                            android:textSize="11sp"
+                            android:lineSpacingMultiplier="1.65" />
+                    </LinearLayout>
+                    <Button
+                        android:id="@+id/btnShareWithDoctor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:text="Share with Doctor"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:background="@drawable/bg_share_btn"
+                        android:drawableStart="@drawable/ic_send"
+                        android:drawablePadding="7dp" />
+            </LinearLayout>
+        </ScrollView>
+
+        <ScrollView android:id="@+id/doctorPanel" android:layout_width="match_parent" android:layout_height="match_parent" android:scrollbars="none" android:visibility="gone">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="11dp" android:paddingBottom="16dp">
+                    <!-- Shared strip -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_next_card"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        android:layout_marginBottom="9dp">
+
+                        <FrameLayout android:layout_width="30dp" android:layout_height="30dp" android:background="@drawable/bg_shared_av" android:layout_marginEnd="8dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="A" android:textColor="@color/white" android:textSize="12sp" android:textStyle="bold" />
+                        </FrameLayout>
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Aarav Shah, M 28" android:textColor="@color/hdr" android:textSize="11sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Shared · Mar 6, 2026 · Encrypted" android:textColor="@color/muted" android:textSize="10sp" android:layout_marginTop="1dp" />
+                        </LinearLayout>
+
+                        <ImageView android:layout_width="14dp" android:layout_height="14dp" android:layout_marginStart="8dp" android:src="@drawable/ic_lock" app:tint="@color/hdr" tools:ignore="ContentDescription" />
+                    </LinearLayout>
+                <!-- Drug table -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/card_bg" android:orientation="vertical" android:padding="11dp" android:layout_marginBottom="9dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="@color/g1" android:padding="6dp" android:layout_marginBottom="4dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="2" android:text="Drug" android:textColor="@color/muted" android:textSize="10sp" android:textStyle="bold" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Dosage" android:textColor="@color/muted" android:textSize="10sp" android:textStyle="bold" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Duration" android:textColor="@color/muted" android:textSize="10sp" android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="6dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="2" android:text="Paracetamol 500mg" android:textColor="@color/txt" android:textSize="11sp" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="3× / day p.c." android:textColor="@color/txt" android:textSize="11sp" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="5 days" android:textColor="@color/txt" android:textSize="11sp" />
+                    </LinearLayout>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/g1" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="6dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="2" android:text="Azithromycin 250mg" android:textColor="@color/txt" android:textSize="11sp" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="1× / day a.c." android:textColor="@color/txt" android:textSize="11sp" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="3 days" android:textColor="@color/txt" android:textSize="11sp" />
+                    </LinearLayout>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/g1" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="6dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="2" android:text="Cetirizine 10mg" android:textColor="@color/txt" android:textSize="11sp" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="1× HS" android:textColor="@color/txt" android:textSize="11sp" />
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="5 days" android:textColor="@color/txt" android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Interaction check -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/card_bg" android:orientation="vertical" android:padding="11dp" android:layout_marginBottom="9dp">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="DRUG INTERACTION CHECK" android:textColor="@color/muted" android:textSize="10sp" android:textStyle="bold" android:letterSpacing="0.09" android:layout_marginBottom="8dp" />
+                    <include layout="@layout/item_doc_param" android:id="@+id/paramInteraction1" />
+                    <include layout="@layout/item_doc_param" android:id="@+id/paramInteraction2" />
+                    <include layout="@layout/item_doc_param" android:id="@+id/paramAllergy" />
+                </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/bg_next_card" android:orientation="vertical" android:padding="9dp" android:layout_marginBottom="9dp">
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/tvDoctorReport"
+                        android:text="Loading clinical report..." android:textColor="@color/hdr" android:textSize="11sp" android:lineSpacingMultiplier="1.6" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/bg_next_card" android:orientation="vertical" android:padding="9dp" android:layout_marginBottom="9dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PHARMACIST NOTES" android:textColor="@color/hdr" android:textSize="10sp" android:textStyle="bold" android:letterSpacing="0.03" android:layout_marginBottom="6dp" />
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="top" android:orientation="horizontal" android:layout_marginBottom="4dp">
+                            <FrameLayout android:layout_width="16dp" android:layout_height="16dp" android:background="@drawable/bg_rec_num" android:layout_marginEnd="6dp" android:layout_marginTop="1dp">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="1" android:textColor="@color/white" android:textSize="9sp" android:textStyle="bold" />
+                            </FrameLayout>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Verify penicillin allergy status before dispensing" android:textColor="@color/sub" android:textSize="11sp" android:lineSpacingMultiplier="1.5" />
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="top" android:orientation="horizontal" android:layout_marginBottom="4dp">
+                            <FrameLayout android:layout_width="16dp" android:layout_height="16dp" android:background="@drawable/bg_rec_num" android:layout_marginEnd="6dp" android:layout_marginTop="1dp">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="2" android:textColor="@color/white" android:textSize="9sp" android:textStyle="bold" />
+                            </FrameLayout>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Counsel patient on Cetirizine drowsiness risk" android:textColor="@color/sub" android:textSize="11sp" android:lineSpacingMultiplier="1.5" />
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="top" android:orientation="horizontal" android:layout_marginBottom="4dp">
+                            <FrameLayout android:layout_width="16dp" android:layout_height="16dp" android:background="@drawable/bg_rec_num" android:layout_marginEnd="6dp" android:layout_marginTop="1dp">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="3" android:textColor="@color/white" android:textSize="9sp" android:textStyle="bold" />
+                            </FrameLayout>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Complete antibiotic course even if symptoms resolve" android:textColor="@color/sub" android:textSize="11sp" android:lineSpacingMultiplier="1.5" />
+                        </LinearLayout>
+                    </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </ViewFlipper>
+</LinearLayout>

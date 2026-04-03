@@ -1,16 +1,25 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Keep same light theme for dark mode to maintain medical dashboard consistency -->
-    <style name="Base.Theme.MediScan" parent="Theme.Material3.Light.NoActionBar">
-        <item name="colorPrimary">@color/primary_dark_blue</item>
-        <item name="colorPrimaryVariant">@color/secondary_teal</item>
-        <item name="colorSecondary">@color/accent_teal</item>
-        <item name="colorSecondaryVariant">@color/bright_accent</item>
-        <item name="android:colorBackground">@color/background_color</item>
-        <item name="colorSurface">@color/card_background</item>
+    <!-- 
+        MediScan uses a consistent brand-focused UI. 
+        Dark mode themes are derived from the base style.
+    -->
+    <style name="Theme.MediScan" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Brand colors -->
+        <item name="colorPrimary">@color/hdr</item>
+        <item name="colorPrimaryVariant">@color/sub</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorOnSecondary">@color/white</item>
-        <item name="colorOnBackground">@color/text_dark</item>
-        <item name="android:statusBarColor">@color/primary_dark_blue</item>
-        <item name="android:navigationBarColor">@color/white</item>
+        <item name="colorAccent">@color/accent</item>
+
+        <!-- UI Colors (Dark variant) -->
+        <item name="android:windowBackground">#121212</item>
+        <item name="colorSurface">#1E1E1E</item>
+
+        <!-- Status & Nav Bar -->
+        <item name="android:statusBarColor">#121212</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">#121212</item>
+
+        <!-- Window features -->
+        <item name="android:windowNoTitle">true</item>
     </style>
 </resources>
