@@ -5,6 +5,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.ViewFlipper
 import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
 
 /**
  * Base class for all analysis screens (Lab, ECG, MRI, X-Ray, CT, Retinal, Prescription).
@@ -47,14 +48,14 @@ abstract class BaseDualViewFragment : Fragment() {
 
         if (isPatient) {
             patientBtn?.setBackgroundResource(R.drawable.bg_vtoggle_active)
-            patientBtn?.setTextColor(requireContext().getColor(R.color.white))
+            patientBtn?.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             doctorBtn?.setBackgroundResource(android.R.color.transparent)
-            doctorBtn?.setTextColor(requireContext().getColor(R.color.muted))
+            doctorBtn?.setTextColor(ContextCompat.getColor(requireContext(), R.color.muted))
         } else {
             doctorBtn?.setBackgroundResource(R.drawable.bg_vtoggle_active)
-            doctorBtn?.setTextColor(requireContext().getColor(R.color.white))
+            doctorBtn?.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             patientBtn?.setBackgroundResource(android.R.color.transparent)
-            patientBtn?.setTextColor(requireContext().getColor(R.color.muted))
+            patientBtn?.setTextColor(ContextCompat.getColor(requireContext(), R.color.muted))
         }
     }
 

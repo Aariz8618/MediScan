@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 
@@ -17,6 +18,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        ensureDefaultProfile(view)
 
         view.findViewById<Button>(R.id.btnEdit)?.setOnClickListener {
             Toast.makeText(requireContext(), "Edit profile coming soon", Toast.LENGTH_SHORT).show()
@@ -53,5 +55,23 @@ class ProfileFragment : Fragment() {
             Toast.makeText(requireContext(), "Signed out", Toast.LENGTH_SHORT).show()
             requireActivity().finish()
         }
+    }
+
+    private fun ensureDefaultProfile(view: View) {
+        val prefs = requireContext().applicationContext
+            .getSharedPreferences("mediscan_prefs", android.content.Context.MODE_PRIVATE)
+        if (!prefs.contains("profile_name")) {
+            prefs.edit()
+                .putString("profile_name", "Patient")
+                .putInt("profile_age", 28)
+                .putString("profile_gender", "Not specified")
+                .apply()
+        }
+        val title = view.findViewById<TextView>(R.id.tvProfileName)
+        val subtitle = view.findViewById<TextView>(R.id.tvProfileSubtitle)
+        val name = prefs.getString("profile_name", "Patient").orEmpty().ifBlank { "Patient" }
+        val age = prefs.getInt("profile_age", 28)
+        title?.text = name
+        subtitle?.text = "Age $age · Profile"
     }
 }

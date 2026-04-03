@@ -36,13 +36,17 @@ class ProcessingFragment : Fragment() {
 
         // Get arguments passed from UploadFragment
         val fileUriStr    = arguments?.getString("file_uri")
-        val analysisType  = arguments?.getString("analysis_type") ?: "lab"
+        val analysisType  = arguments?.getString("analysis_type").orEmpty()
         val patientName   = arguments?.getString("patient_name")  ?: "Patient"
         val patientAge    = arguments?.getInt("patient_age", 25)  ?: 25
         val patientGender = arguments?.getString("patient_gender") ?: "Not specified"
 
         if (fileUriStr == null) {
             showError(view, "No file provided")
+            return
+        }
+        if (analysisType.isBlank()) {
+            showError(view, "No analysis type selected")
             return
         }
 
@@ -100,8 +104,8 @@ class ProcessingFragment : Fragment() {
                     )
                 }
 
-                if (response.isSuccessful && response.body()?.success == true) {
-                    val body = response.body()!!
+                val body = response.body()
+                if (response.isSuccessful && body != null && body.success) {
                     // Store result in shared singleton
                     AnalysisResult.patientReport = body.patientReport
                     AnalysisResult.doctorReport  = body.doctorReport
@@ -109,11 +113,12 @@ class ProcessingFragment : Fragment() {
                     AnalysisResult.modelUsed     = body.modelUsed ?: ""
                     AnalysisResult.confidence    = body.confidence ?: 0f
                     AnalysisResult.patientName   = body.patientName
+                    AnalysisResult.saveLatestAndHistory(requireContext().applicationContext)
 
                     updateStatus(view, "Analysis complete!")
                     navigateToResults(analysisType)
                 } else {
-                    val errorMsg = response.body()?.error ?: response.message()
+                    val errorMsg = body?.error ?: response.message()
                     showError(view, "API Error: $errorMsg")
                 }
 
