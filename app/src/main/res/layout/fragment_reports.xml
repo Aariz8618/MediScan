@@ -56,6 +56,7 @@
 
     <!-- FILTER TABS -->
     <HorizontalScrollView
+        android:id="@+id/filterTabsContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none"
@@ -75,6 +76,17 @@
             <TextView android:id="@+id/tabEcg" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ECG" android:textColor="@color/muted" android:textSize="12sp" android:paddingStart="12dp" android:paddingEnd="12dp" android:paddingTop="8dp" android:paddingBottom="8dp" />
         </LinearLayout>
     </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/tvEmptyState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No saved reports yet"
+        android:textColor="@color/muted"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:padding="16dp"
+        android:visibility="gone" />
 
     <!-- REPORT LIST -->
     <ScrollView

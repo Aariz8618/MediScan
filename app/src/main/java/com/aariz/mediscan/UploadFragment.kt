@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 class UploadFragment : Fragment() {
 
     private var selectedUri: Uri? = null
-    private var selectedType: String? = "lab"
+    private var selectedType: String? = null
 
     private val pickFile = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {

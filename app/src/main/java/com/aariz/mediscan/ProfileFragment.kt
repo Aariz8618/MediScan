@@ -67,9 +67,8 @@ class ProfileFragment : Fragment() {
                 .putString("profile_gender", "Not specified")
                 .apply()
         }
-        val hero = view.findViewById<LinearLayout>(R.id.profileHero)
-        val title = hero?.getChildAt(1) as? TextView
-        val subtitle = hero?.getChildAt(2) as? TextView
+        val title = view.findViewById<TextView>(R.id.tvProfileName)
+        val subtitle = view.findViewById<TextView>(R.id.tvProfileSubtitle)
         val name = prefs.getString("profile_name", "Patient").orEmpty().ifBlank { "Patient" }
         val age = prefs.getInt("profile_age", 28)
         title?.text = name

@@ -16,6 +16,7 @@ object AnalysisResult {
     private const val PREFS = "mediscan_prefs"
     private const val KEY_LATEST = "latest_result"
     private const val KEY_HISTORY = "report_history"
+    private const val MAX_HISTORY_ITEMS = 100
     private val gson = Gson()
 
     data class StoredResult(
@@ -50,8 +51,10 @@ object AnalysisResult {
         )
         val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         val existing = getHistory(context).toMutableList()
-        existing.removeAll { it.reportType == current.reportType }
         existing.add(0, current)
+        if (existing.size > MAX_HISTORY_ITEMS) {
+            existing.subList(MAX_HISTORY_ITEMS, existing.size).clear()
+        }
 
         prefs.edit()
             .putString(KEY_LATEST, gson.toJson(current))

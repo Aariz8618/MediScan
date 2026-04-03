@@ -3,7 +3,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -26,6 +26,8 @@ class ReportsFragment : Fragment() {
         val tabImaging = view.findViewById<TextView>(R.id.tabImaging)
         val tabEcg = view.findViewById<TextView>(R.id.tabEcg)
         val tabs = listOf(tabAll, tabLab, tabImaging, tabEcg)
+        val tabsContainer = view.findViewById<HorizontalScrollView>(R.id.filterTabsContainer)
+        val emptyState = view.findViewById<TextView>(R.id.tvEmptyState)
         val cardMap = mapOf(
             "lab" to view.findViewById<LinearLayout>(R.id.cardCbc),
             "ecg" to view.findViewById<LinearLayout>(R.id.cardEcg),
@@ -73,8 +75,7 @@ class ReportsFragment : Fragment() {
             openByType("prescription", PrescriptionFragment())
         }
 
-        view.findViewById<EditText>(R.id.searchBar)?.isEnabled = false
-        renderHistoryVisibility(cardMap)
+        renderHistoryVisibility(cardMap, emptyState, tabsContainer)
         setActiveTab(tabAll, Filter.ALL)
     }
 
@@ -85,16 +86,21 @@ class ReportsFragment : Fragment() {
             .commit()
     }
 
-    private fun renderHistoryVisibility(cardMap: Map<String, LinearLayout>) {
+    private fun renderHistoryVisibility(
+        cardMap: Map<String, LinearLayout>,
+        emptyState: TextView,
+        tabsContainer: HorizontalScrollView
+    ) {
         availableTypes = AnalysisResult.getHistory(requireContext().applicationContext).map { it.reportType }.toSet()
         cardMap.forEach { (type, card) ->
             card.visibility = if (availableTypes.contains(type)) View.VISIBLE else View.GONE
         }
         if (availableTypes.isEmpty()) {
-            cardMap["lab"]?.visibility = View.VISIBLE
-            cardMap["ecg"]?.visibility = View.VISIBLE
-            cardMap["brain_mri"]?.visibility = View.VISIBLE
-            availableTypes = setOf("lab", "ecg", "brain_mri")
+            emptyState.visibility = View.VISIBLE
+            tabsContainer.visibility = View.GONE
+        } else {
+            emptyState.visibility = View.GONE
+            tabsContainer.visibility = View.VISIBLE
         }
     }
 
@@ -108,7 +114,6 @@ class ReportsFragment : Fragment() {
         cardMap.forEach { (type, card) ->
             card.visibility = if (showSet.contains(type)) View.VISIBLE else View.GONE
         }
-        view.findViewById<TextView>(R.id.tabAll)?.contentDescription = "reports_filter_${filter.name.lowercase()}"
     }
 
     private fun openByType(type: String, fallback: Fragment) {
