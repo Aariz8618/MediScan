@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 class UploadFragment : Fragment() {
 
     private var selectedUri: Uri? = null
-    private var selectedType: String = "lab"   // default
+    private var selectedType: String? = "lab"
 
     private val pickFile = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
@@ -79,7 +79,12 @@ class UploadFragment : Fragment() {
                 Toast.makeText(requireContext(), "Please select a file first", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            navigateToProcessing(uri, selectedType)
+            val type = selectedType
+            if (type.isNullOrBlank()) {
+                Toast.makeText(requireContext(), "Please select report type", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            navigateToProcessing(uri, type)
         }
     }
 
@@ -90,13 +95,19 @@ class UploadFragment : Fragment() {
     }
 
     private fun navigateToProcessing(uri: Uri, type: String) {
+        val appCtx = requireContext().applicationContext
+        val prefs = appCtx.getSharedPreferences("mediscan_prefs", android.content.Context.MODE_PRIVATE)
+        val profileName = prefs.getString("profile_name", "Patient").orEmpty().ifBlank { "Patient" }
+        val profileAge = prefs.getInt("profile_age", 25)
+        val profileGender = prefs.getString("profile_gender", "Not specified").orEmpty().ifBlank { "Not specified" }
+
         val fragment = ProcessingFragment().apply {
             arguments = Bundle().apply {
                 putString("file_uri", uri.toString())
                 putString("analysis_type", type)
-                putString("patient_name", "Patient")
-                putInt("patient_age", 25)
-                putString("patient_gender", "Not specified")
+                putString("patient_name", profileName)
+                putInt("patient_age", profileAge)
+                putString("patient_gender", profileGender)
             }
         }
         parentFragmentManager.beginTransaction()
